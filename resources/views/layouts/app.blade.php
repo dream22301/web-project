@@ -31,7 +31,7 @@
     <div class="flex h-screen overflow-hidden" x-data="themeManager()">
 
         <!-- Sidebar -->
-        <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-colors duration-200 flex-shrink-0">
+        <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-colors duration-200 shrink-0">
 
             <!-- Logo -->
             <div class="h-16 flex items-center px-6 border-b border-gray-200 dark:border-gray-700">
@@ -116,7 +116,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
 
             <!-- Top Header -->
-            <header class="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 transition-colors duration-200 flex-shrink-0">
+            <header class="h-16 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 transition-colors duration-200 shrink-0">
 
                 <div class="max-w-xs w-full relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -135,7 +135,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
                     </button>
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 border-2 border-white dark:border-gray-700 shadow-sm cursor-pointer"></div>
+                    <div class="w-8 h-8 rounded-full bg-linear-to-tr from-blue-500 to-indigo-500 border-2 border-white dark:border-gray-700 shadow-sm cursor-pointer"></div>
                 </div>
             </header>
 
