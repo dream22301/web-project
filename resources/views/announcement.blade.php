@@ -17,7 +17,8 @@
             <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">New Announcement</h3>
         </div>
 
-        <form action="#" method="POST" class="p-6 sm:p-8 space-y-6">
+        <form action="{{ route('announcement.database1') }}" method="POST" class="p-6 sm:p-8 space-y-6">
+            @csrf
 
             <!-- Title -->
             <div>
@@ -48,13 +49,13 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Priority</label>
                 <div class="flex flex-wrap gap-4">
                     @foreach([
-                        ['value' => 'normal',  'label' => 'Normal',  'color' => 'text-gray-600 dark:text-gray-300'],
-                        ['value' => 'info',    'label' => 'Info',    'color' => 'text-blue-600 dark:text-blue-400'],
-                        ['value' => 'warning', 'label' => 'Warning', 'color' => 'text-amber-600 dark:text-amber-400'],
-                        ['value' => 'urgent',  'label' => 'Urgent',  'color' => 'text-red-600 dark:text-red-400'],
+                        ['value' => 0,  'label' => 'Normal',  'color' => 'text-gray-600 dark:text-gray-300'],
+                        ['value' => 1,    'label' => 'Info',    'color' => 'text-blue-600 dark:text-blue-400'],
+                        ['value' => 2, 'label' => 'Warning', 'color' => 'text-amber-600 dark:text-amber-400'],
+                        ['value' => 3,  'label' => 'Urgent',  'color' => 'text-red-600 dark:text-red-400'],
                     ] as $p)
                     <div class="flex items-center">
-                        <input id="priority-{{ $p['value'] }}" name="priority" type="radio" value="{{ $p['value'] }}"
+                        <input id="priority-{{ $p['value'] }}" name="prioritas" type="radio" value="{{ $p['value'] }}"
                                class="h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-600 dark:bg-gray-700"
                                {{ $p['value'] === 'normal' ? 'checked' : '' }}>
                         <label for="priority-{{ $p['value'] }}" class="ml-2 text-sm font-medium {{ $p['color'] }}">
