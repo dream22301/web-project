@@ -2,17 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
-    public function login()
-    {
-        return view('auth.login');
+
+    public function login_process(Request $request) {
+        $validate1 = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:10',
+        ]);
+
+        if (Auth::attempt($validate1)) {
+            return redirect(route('dashboard'));
+        } else {
+            return back()->with('failed', 'Login Failed');
+        }
     }
 
-    public function register()
-    {
-        return view('auth.register');
+    public function register_process(Request $request) {
+        $validate2 = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:10|confirmed'
+        ]);
+
+        User::create([
+            'name' => $validate2['name'],
+            'email' => $validate2['email'],
+            'password' => bcrypt($validate2['password']),
+        ]);
+
+        if (Auth::attempt($validate2)) {
+            return redirect(route('log-in'));
+        } else {
+            return back()->with('failed', 'register Failed');
+        }
     }
 }

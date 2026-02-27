@@ -6,11 +6,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/schedule', [ScheduleController::class, 'create']);
 Route::get('/announcement', [AnnouncementController::class, 'pengumuman']);
 
 Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/login', function() {
+    return view('auth.login');
+});
+Route::get('/register', function() {
+    return view('auth.register');
+});
+
+Route::post('/register', [AuthController::class, 'register_process'])->name('regist');
+Route::post('/login', [AuthController::class, 'login_process'])->name('log-in');

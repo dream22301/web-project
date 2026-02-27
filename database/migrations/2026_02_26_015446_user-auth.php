@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('account-user', function(Blueprint $userBlueprint) {
+        Schema::create('users', function(Blueprint $userBlueprint) {
             $userBlueprint->id()->autoIncrement();
-            $userBlueprint->string('fullname');
+            $userBlueprint->string('name');
             $userBlueprint->string('email')->unique();
             $userBlueprint->string('password');
             $userBlueprint->timestamps();

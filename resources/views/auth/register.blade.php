@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <form class="space-y-6" action="#" method="POST">
+    <form class="space-y-6" action="{{ route('regist') }}" method="POST">
         @csrf
 
         {{-- Full Name --}}
