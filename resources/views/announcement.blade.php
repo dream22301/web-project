@@ -153,4 +153,67 @@
         </form>
     </div>
 
+    {{-- Announcements List --}}
+    <div class="max-w-3xl mt-8">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Published Announcements</h2>
+            <span class="text-sm text-gray-400 dark:text-gray-500">{{ $announcements->count() }} total</span>
+        </div>
+
+        @if($announcements->isEmpty())
+            <div class="text-center py-10 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
+                <svg class="mx-auto w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                </svg>
+                <p class="text-sm text-gray-400 dark:text-gray-500">No announcements yet. Create your first one above.</p>
+            </div>
+        @else
+            <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
+                @foreach($announcements as $announcement)
+                @php
+                    $priorityConfig = [
+                        0 => ['label' => 'Normal',  'class' => 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'],
+                        1 => ['label' => 'Info',    'class' => 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400'],
+                        2 => ['label' => 'Warning', 'class' => 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400'],
+                        3 => ['label' => 'Urgent',  'class' => 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400'],
+                    ][$announcement->prioritas] ?? ['label' => 'Normal', 'class' => 'bg-gray-100 text-gray-600'];
+                @endphp
+                <div class="flex items-start justify-between gap-4 px-5 py-4">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+                                {{ $announcement->title }}
+                            </span>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $priorityConfig['class'] }}">
+                                {{ $priorityConfig['label'] }}
+                            </span>
+                            <span class="text-xs text-gray-400 dark:text-gray-500">{{ ucfirst($announcement->audience) }}</span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">{{ $announcement->content }}</p>
+                        @if($announcement->publish_date)
+                        <p class="mt-1 text-xs text-gray-400 dark:text-gray-500">
+                            Publish: {{ \Carbon\Carbon::parse($announcement->publish_date)->format('d M Y') }}
+                        </p>
+                        @endif
+                    </div>
+
+                    {{-- Delete Button --}}
+                    <form action="{{ route('announcement.destroy', $announcement->id) }}" method="POST"
+                          onsubmit="return confirm('Delete this announcement?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="flex-shrink-0 p-2 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-900/30 transition-colors"
+                                title="Delete announcement">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
 @endsection

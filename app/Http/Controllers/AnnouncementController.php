@@ -22,7 +22,13 @@ class AnnouncementController extends Controller
         
     }
     public function pengumuman() {
-        return view('announcement');
+        $announcements = Announcement::latest()->get();
+        return view('announcement', compact('announcements'));
+    }
+
+    public function destroy($id) {
+        Announcement::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Pengumuman telah dihapus!');
     }
 
 }

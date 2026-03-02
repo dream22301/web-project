@@ -11,6 +11,7 @@ Route::get('/schedule', [ScheduleController::class, 'create']);
 Route::get('/announcement', [AnnouncementController::class, 'pengumuman']);
 
 Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
+Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 
 Route::get('/login', function() {
     return view('auth.login');
