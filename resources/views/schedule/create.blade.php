@@ -27,11 +27,18 @@
                     <select id="subject" name="subject"
                             class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                         <option value="">Select subject...</option>
+                        <option>Konsen RPL</option>
+                        <option>Bahasa Indonesia</option>
+                        <option>Bahasa Inggris</option>
                         <option>Matematika</option>
-                        <option>Physics</option>
-                        <option>Biology</option>
-                        <option>English Literature</option>
-                        <option>History</option>
+                        <option>Kewirausahaan</option>
+                        <option>Pendidikan Jasmani olahraga dan kesehatan</option>
+                        <option>Desain Grafis</option>
+                        <option>Bimbingan konseling</option>
+                        <option>Sejarah</option>
+                        <option>Pendidikan Pancasila</option>
+                        <option>Bahasa Jawa</option>
+                        <option>Pendidikan Agama dan Budi Pekerti</option>
                     </select>
                 </div>
 
@@ -41,10 +48,9 @@
                     <select id="class" name="class"
                             class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                         <option value="">Select class...</option>
-                        <option>X - Science 1</option>
-                        <option>X - Science 2</option>
-                        <option>XI - Social 1</option>
-                        <option>XII - Science 1</option>
+                        <option>X - RPL</option>
+                        <option>XI - RPL</option>
+                        <option>XII - RPL</option>
                     </select>
                 </div>
 
@@ -52,7 +58,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Day</label>
                     <div class="flex flex-wrap gap-4">
-                        @foreach(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] as $day)
+                        @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $day)
                         <div class="flex items-center">
                             <input id="day-{{ strtolower($day) }}" name="day" type="radio" value="{{ $day }}"
                                    class="h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-600 dark:bg-gray-700">
