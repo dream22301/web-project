@@ -17,7 +17,8 @@
             <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Add New Schedule</h3>
         </div>
 
-        <form action="#" method="POST" class="p-6 sm:p-8">
+        <form action="{{ route('schedule-create') }}" method="POST" class="p-6 sm:p-8">
+            @csrf
 
             <div class="grid grid-cols-1 gap-y-6 gap-x-8 sm:grid-cols-2">
 

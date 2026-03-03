@@ -19,6 +19,9 @@ Route::post('/login', [AuthController::class, 'login_process'])->name('log-in');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/schedule', [ScheduleController::class, 'create']);
+
+Route::post('/schedule', [ScheduleController::class, 'create_process'])->name('schedule-create');
+
 Route::get('/announcement', [AnnouncementController::class, 'pengumuman']);
 
 Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
