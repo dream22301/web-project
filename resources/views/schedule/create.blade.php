@@ -27,7 +27,7 @@
                     <select id="subject" name="subject"
                             class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                         <option value="">Select subject...</option>
-                        <option>Mathematics</option>
+                        <option>Matematika</option>
                         <option>Physics</option>
                         <option>Biology</option>
                         <option>English Literature</option>
