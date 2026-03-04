@@ -37,7 +37,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validate2)) {
-            return redirect(route('log-in'));
+            return redirect(url('/'));
         } else {
             return back()->with('failed', 'register Failed');
         }
