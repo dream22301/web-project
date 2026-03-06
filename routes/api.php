@@ -14,3 +14,4 @@ Route::get('/test', function() {
 Route::get('schedule', function() {
     return response()->json(Schedule::latest()->get());
 });
+
