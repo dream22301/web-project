@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
@@ -37,3 +38,9 @@ Route::get('/questions/{id}',                                   [QuestionControl
 Route::post('/questions/{id}/questions',                        [QuestionController::class, 'addQuestion'])->name('questions.addQuestion');
 Route::delete('/questions/{id}/questions/{qid}',                [QuestionController::class, 'destroyQuestion'])->name('questions.destroyQuestion');
 Route::delete('/questions/{id}',                                [QuestionController::class, 'destroy'])->name('questions.destroy');
+
+// Settings & Logout
+Route::get('/settings',              [SettingsController::class, 'index'])->name('settings');
+Route::post('/settings/profile',     [SettingsController::class, 'updateProfile'])->name('settings.profile');
+Route::post('/settings/password',    [SettingsController::class, 'updatePassword'])->name('settings.password');
+Route::post('/logout',               [AuthController::class, 'logout'])->name('logout');
