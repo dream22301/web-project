@@ -158,7 +158,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
                     </button>
-                    <div class="w-8 h-8 rounded-full bg-linear-to-tr from-blue-500 to-indigo-500 border-2 border-white dark:border-gray-700 shadow-sm cursor-pointer"></div>
+                    <div class="w-8 h-8 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-600">
+                        <img src="{{ Auth::user()->profilePhotoUrl() }}" alt="profile", class="w-full h-full object-cover">
+                    </div>
                 </div>
             </header>
 
