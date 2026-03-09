@@ -22,12 +22,24 @@ class DashboardController extends Controller
         $totalQuestions = QuestionSet::where('user_id',auth()->id())->count();
         $totalUsers = User::count();
 
-        $today = Carbon::now()->format('l');
+        $days = [
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat'
+        ];
 
+        $todayEnglish = now()->format('l');
+        $today = $days[$todayEnglish] ?? null;
+
+        $upcomingSchedules = collect();
+
+        if ($today) {
         $upcomingSchedules = Schedule::where('day', $today)
             ->orderBy('start_time')
             ->get();
-        
+        }
         $todayAnnouncements = Announcement::whereDate('publish_date', Carbon::today())
             ->latest('publish_date')
             ->limit(5)
