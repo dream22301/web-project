@@ -22,8 +22,9 @@ class Announcement extends Model
         'content',
         'publish_date',
     ];
+    protected $appends = ['priority_label'];
 
     public function getPriorityLabelAttribute() {
-        return self::PRIORITY[$this->prioritas];
+        return self::PRIORITY[$this->prioritas] ?? 'normal';
     }
 }
