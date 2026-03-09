@@ -9,10 +9,10 @@ class Announcement extends Model
 {
     use HasFactory;
     const PRIORITY = [
-        'normal' => 0,
-        'info' => 1,
-        'warning' => 2,
-        'urgent' => 3,
+        0 => 'normal',
+        1 => 'info',
+        2 => 'warning',
+        3 => 'urgent',
     ];
 
     protected $fillable = [

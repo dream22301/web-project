@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\QuestionSet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Schedule;
+use App\Models\Announcement;
+use App\Models\Question;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -11,6 +17,22 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $totalSchedules = Schedule::count();
+        $totalAnnouncements = Announcement::count();
+        $totalQuestions = QuestionSet::where('user_id',auth()->id())->count();
+        $totalUsers = User::count();
+
+        $today = Carbon::now()->format('l');
+
+        $upcomingSchedules = Schedule::where('day', $today)
+            ->orderBy('start_time')
+            ->get();
+        
+        $todayAnnouncements = Announcement::whereDate('publish_date', Carbon::today())
+            ->latest('publish_date')
+            ->limit(5)
+            ->get();
+
+        return view('dashboard', compact('totalSchedules', 'totalAnnouncements', 'totalQuestions', 'totalUsers', 'upcomingSchedules', 'todayAnnouncements'));
     }
 }
