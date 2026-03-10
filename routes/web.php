@@ -25,6 +25,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/schedule', [ScheduleController::class, 'create']);
 
 Route::post('/schedule',[ScheduleController::class, 'create_process'])->name('schedule-create');
+Route::delete('/schedule/{id}',[ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
 Route::get('/announcement',[AnnouncementController::class, 'pengumuman']);
 

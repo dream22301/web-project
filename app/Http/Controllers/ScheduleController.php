@@ -24,6 +24,15 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        return view('schedule.create');
+        $schedules = Schedule::orderBy('day')->orderBy('start_time')->get();
+        return view('schedule.create', compact('schedules'));
+    }
+
+    public function destroy($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+        $schedule->delete();
+
+        return redirect()->back()->with('success', 'Jadwal berhasil dihapus!');
     }
 }
