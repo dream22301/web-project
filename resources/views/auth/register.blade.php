@@ -58,34 +58,6 @@
             @error('email') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         </div>
 
-        {{-- Subject Type --}}
-        <div>
-            <label for="subject_type" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                Teacher Subject
-            </label>
-            <div class="mt-2">
-                <select id="subject_type" name="subject_type"
-                        class="block w-full rounded-md border-0 py-2.5 px-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset focus:ring-2 focus:ring-inset text-sm transition-colors
-                               {{ $errors->has('subject_type') ? 'ring-red-400 dark:ring-red-500 focus:ring-red-500' : 'ring-gray-300 dark:ring-gray-600 focus:ring-blue-600' }}">
-                    <option value="">Select your subject...</option>
-                    <option value="RPL" {{ old('subject_type') == 'RPL' ? 'selected' : '' }}>RPL</option>
-                    <option value="Bahasa Indonesia" {{ old('subject_type') == 'Bahasa Indonesia' ? 'selected' : '' }}>Bahasa Indonesia</option>
-                    <option value="Bahasa Inggris" {{ old('subject_type') == 'Bahasa Inggris' ? 'selected' : '' }}>Bahasa Inggris</option>
-                    <option value="Matematika" {{ old('subject_type') == 'Matematika' ? 'selected' : '' }}>Matematika</option>
-                    <option value="Kewirausahaan" {{ old('subject_type') == 'Kewirausahaan' ? 'selected' : '' }}>Kewirausahaan</option>
-                    <option value="PJOK" {{ old('subject_type') == 'PJOK' ? 'selected' : '' }}>Pendidikan Jasmani Olahraga dan Kesehatan</option>
-                    <option value="Desain Grafis" {{ old('subject_type') == 'Desain Grafis' ? 'selected' : '' }}>Desain Grafis</option>
-                    <option value="Bimbingan Konseling" {{ old('subject_type') == 'Bimbingan Konseling' ? 'selected' : '' }}>Bimbingan Konseling</option>
-                    <option value="Sejarah" {{ old('subject_type') == 'Sejarah' ? 'selected' : '' }}>Sejarah</option>
-                    <option value="Pendidikan Pancasila" {{ old('subject_type') == 'Pendidikan Pancasila' ? 'selected' : '' }}>Pendidikan Pancasila</option>
-                    <option value="Bahasa Jawa" {{ old('subject_type') == 'Bahasa Jawa' ? 'selected' : '' }}>Bahasa Jawa</option>
-                    <option value="Pendidikan Agama" {{ old('subject_type') == 'Pendidikan Agama' ? 'selected' : '' }}>Pendidikan Agama dan Budi Pekerti</option>
-                    <option value="Other" {{ old('subject_type') == 'Other' ? 'selected' : '' }}>Other Subject</option>
-                </select>
-            </div>
-            @error('subject_type') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
-        </div>
-
         {{-- Password --}}
         <div>
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
