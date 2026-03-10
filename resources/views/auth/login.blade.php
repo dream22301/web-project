@@ -58,17 +58,6 @@
             @error('password') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
         </div>
 
-        {{-- Remember me & Forgot Password --}}
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-            </div>
-
-            <div class="text-sm leading-6">
-                <a href="#" class="font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-                    Forgot password?
-                </a>
-            </div>
-        </div>
 
         {{-- Submit --}}
         <div>
