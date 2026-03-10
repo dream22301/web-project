@@ -11,7 +11,7 @@
         {{-- Failed Login Banner --}}
         @if(session('failed'))
         <div class="flex items-center gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-800 dark:text-red-300 text-sm">
-            <svg class="w-5 h-5 flex-shrink-0 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 shrink-0 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             {{ session('failed') }}
@@ -21,7 +21,7 @@
         {{-- Validation Errors Banner --}}
         @if($errors->any())
         <div class="flex items-start gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-800 dark:text-red-300 text-sm">
-            <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
             <ul class="list-disc list-inside space-y-0.5">
@@ -61,11 +61,6 @@
         {{-- Remember me & Forgot Password --}}
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <input id="remember-me" name="remember-me" type="checkbox"
-                       class="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-600 dark:bg-gray-700">
-                <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-700 dark:text-gray-300">
-                    Remember me
-                </label>
             </div>
 
             <div class="text-sm leading-6">
