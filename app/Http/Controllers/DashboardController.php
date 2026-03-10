@@ -17,7 +17,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalSchedules = Schedule::count();
+        $totalSchedules = Schedule::where('user_id', auth()->id())->count();
         $totalAnnouncements = Announcement::count();
         $totalQuestions = QuestionSet::where('user_id',auth()->id())->count();
         $totalUsers = User::count();
@@ -36,7 +36,8 @@ class DashboardController extends Controller
         $nowSchedules = collect();
 
         if ($today) {
-        $nowSchedules = Schedule::where('day', $today)
+        $nowSchedules = Schedule::where('user_id', auth()->id())
+            ->where('day', $today)
             ->orderBy('start_time')
             ->get();
         }

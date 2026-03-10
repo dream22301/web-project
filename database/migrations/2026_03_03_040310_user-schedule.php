@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function(Blueprint $schedule){
             $schedule->id();
+            $schedule->foreignId('user_id')->constrained()->cascadeOnDelete();
             $schedule->string('subject');
             $schedule->string('class');
             $schedule->string('day');
