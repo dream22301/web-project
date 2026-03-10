@@ -24,7 +24,7 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        $schedules = Schedule::orderBy('day')->orderBy('start_time')->get();
+        $schedules = Schedule::orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat')")->orderBy('start_time')->get();
         return view('schedule.create', compact('schedules'));
     }
 

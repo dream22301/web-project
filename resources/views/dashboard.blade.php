@@ -112,13 +112,13 @@
             </ul>
         </div>
 
-        <!-- Upcoming Schedules -->
+        <!-- Now Schedules -->
         <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-100 dark:border-gray-700 transition-colors">
             <div class="p-5 border-b border-gray-200 dark:border-gray-700">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Upcoming Schedules</h3>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Now Schedules</h3>
             </div>
             <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                @forelse($upcomingSchedules as $schedule)
+                @forelse($nowSchedules as $schedule)
                     <li class="p-5">
                         <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-900/40 p-3 rounded-md">
                             <div>

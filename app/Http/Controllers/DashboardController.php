@@ -33,10 +33,10 @@ class DashboardController extends Controller
         $todayEnglish = now()->format('l');
         $today = $days[$todayEnglish] ?? null;
 
-        $upcomingSchedules = collect();
+        $nowSchedules = collect();
 
         if ($today) {
-        $upcomingSchedules = Schedule::where('day', $today)
+        $nowSchedules = Schedule::where('day', $today)
             ->orderBy('start_time')
             ->get();
         }
@@ -45,6 +45,6 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
-        return view('dashboard', compact('totalSchedules', 'totalAnnouncements', 'totalQuestions', 'totalUsers', 'upcomingSchedules', 'todayAnnouncements'));
+        return view('dashboard', compact('totalSchedules', 'totalAnnouncements', 'totalQuestions', 'totalUsers', 'nowSchedules', 'todayAnnouncements'));
     }
 }
