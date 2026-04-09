@@ -7,6 +7,7 @@ use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\StudentScheduleController;
 
 Route::get('/login', function() { return view('auth.login'); })->name('login');
 
@@ -26,6 +27,11 @@ Route::get('/schedule', [ScheduleController::class, 'create']);
 
 Route::post('/schedule',[ScheduleController::class, 'create_process'])->name('schedule-create');
 Route::delete('/schedule/{id}',[ScheduleController::class, 'destroy'])->name('schedule.destroy');
+
+// Student schedules
+Route::get('/student-schedule', [StudentScheduleController::class, 'index'])->name('student-schedule.index');
+Route::post('/student-schedule', [StudentScheduleController::class, 'store'])->name('student-schedule.store');
+Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');
 
 Route::get('/announcement',[AnnouncementController::class, 'pengumuman']);
 
