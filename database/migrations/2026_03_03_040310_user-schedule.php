@@ -17,8 +17,8 @@ return new class extends Migration
             $schedule->string('subject');
             $schedule->string('class');
             $schedule->string('day');
-            $schedule->time('start_time');
-            $schedule->time('end_time');
+            $schedule->unsignedTinyInteger('start_time');
+            $schedule->unsignedTinyInteger('end_time');
             $schedule->timestamps();
         });
     }

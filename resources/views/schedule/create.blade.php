@@ -78,7 +78,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <input type="time" id="start_time" name="start_time"
+                        <input type="number" id="start_time" name="start_time" placeholder="1" min="1" max="12"
                                class="block w-full rounded-md border-0 py-2.5 pl-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <input type="time" id="end_time" name="end_time"
+                        <input type="number" id="end_time" name="end_time" placeholder="4" min="1" max="12"
                                class="block w-full rounded-md border-0 py-2.5 pl-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                     </div>
                 </div>
@@ -142,10 +142,7 @@
                             <span class="text-xs text-gray-400 dark:text-gray-500">{{ $schedule->day }}</span>
                         </div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                            {{ \Carbon\Carbon::parse($schedule->start_time)->format('H:i') }}
-                            @if($schedule->end_time)
-                                - {{ \Carbon\Carbon::parse($schedule->end_time)->format('H:i') }}
-                            @endif
+                            Jam pelajaran ke-{{ $schedule->start_time }} sampai jam pelajaran ke-{{ $schedule->end_time }}
                         </p>
                     </div>
 

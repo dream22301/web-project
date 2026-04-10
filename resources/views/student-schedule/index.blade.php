@@ -92,20 +92,36 @@
                 {{-- Jam Pelajaran --}}
                 <div>
                     <label for="period_start" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dari Jam Pelajaran Ke</label>
-                    <input type="number" id="period_start" name="period_start" value="{{ old('period_start') }}"
-                           min="1" max="12" placeholder="1"
-                           class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
-                                  {{ $errors->has('period_start') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
-                    @error('period_start') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+
+                        <input type="number" id="period_start" name="period_start" value="{{ old('period_start') }}"
+                        min="1" max="12" placeholder="1"
+                        class="block w-full rounded-md pl-10 border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
+                        {{ $errors->has('period_start') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
+                        @error('period_start') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                    </div>
                 </div>
 
                 <div>
                     <label for="period_end" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sampai Jam Pelajaran Ke</label>
-                    <input type="number" id="period_end" name="period_end" value="{{ old('period_end') }}"
-                           min="1" max="12" placeholder="4"
-                           class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
-                                  {{ $errors->has('period_end') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
-                    @error('period_end') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+
+                        <input type="number" id="period_end" name="period_end" value="{{ old('period_end') }}"
+                        min="1" max="12" placeholder="4"
+                        class="block w-full rounded-md border-0 pl-10 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
+                        {{ $errors->has('period_end') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
+                        @error('period_end') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                    </div>
                 </div>
 
             </div>
