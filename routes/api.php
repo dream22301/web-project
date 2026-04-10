@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ScheduleController;
 use App\Models\Announcement;
 use App\Models\Schedule;
 use App\Models\User;
@@ -11,7 +12,5 @@ Route::get('/test', function() {
     return Announcement::latest()->get();
 });
 
-Route::get('schedule', function() {
-    return response()->json(Schedule::latest()->get());
-});
+Route::get('schedule', [ScheduleController::class, 'index']);
 

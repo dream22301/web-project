@@ -83,7 +83,7 @@
                 <div>
                     <label for="room" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Di Ruang</label>
                     <input type="text" id="room" name="room" value="{{ old('room') }}"
-                           placeholder="Contoh: 8, Lab RPL, Aula..."
+                           placeholder="Contoh: Ruang 8, Lab RPL, Aula..."
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
                                   {{ $errors->has('room') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
                     @error('room') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
