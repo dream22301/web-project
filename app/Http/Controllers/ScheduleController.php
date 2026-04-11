@@ -32,10 +32,46 @@ class ScheduleController extends Controller
     public function create()
     {
         $schedules = Schedule::where('user_id', auth()->id())
+        ->where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())
         ->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat')")
         ->orderBy('start_time')
         ->get();
-        return view('schedule.create', compact('schedules'));
+        
+        $history = Schedule::where('user_id', auth()->id())
+            ->where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
+            ->latest('updated_at')
+            ->get()
+            ->groupBy('day');
+            
+        return view('schedule.create', compact('schedules', 'history'));
+    }
+
+    public function edit($id)
+    {
+        $schedule = Schedule::where('user_id', auth()->id())->findOrFail($id);
+        return view('schedule.edit', compact('schedule'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validate3 = $request->validate([
+            'subject' => 'required',
+            'class' => 'required',
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+
+        $schedule = Schedule::where('user_id', auth()->id())->findOrFail($id);
+        $schedule->update([
+            'subject' => $validate3['subject'],
+            'class' => $validate3['class'],
+            'day' => $validate3['day'],
+            'start_time' => $validate3['start_time'],
+            'end_time' => $validate3['end_time'],
+        ]);
+
+        return redirect()->back()->with('success', 'Jadwal telah diperbarui dan dikembalikan ke daftar aktif!');
     }
 
     public function destroy($id)

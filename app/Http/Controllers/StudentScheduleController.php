@@ -11,11 +11,17 @@ class StudentScheduleController extends Controller
     {
         $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-        $schedules = StudentSchedule::all()
+        $schedules = StudentSchedule::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())
+            ->get()
             ->sortBy(fn($s) => [array_search($s->day, $dayOrder), $s->period_start])
             ->groupBy('day');
+            
+        $history = StudentSchedule::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
+            ->latest('updated_at')
+            ->get()
+            ->groupBy('day');
 
-        return view('student-schedule.index', compact('schedules'));
+        return view('student-schedule.index', compact('schedules', 'history'));
     }
 
     public function store(Request $request)
@@ -31,6 +37,28 @@ class StudentScheduleController extends Controller
         StudentSchedule::create($validated);
 
         return redirect()->back()->with('success', 'Jadwal siswa berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $schedule = StudentSchedule::findOrFail($id);
+        return view('student-schedule.edit', compact('schedule'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'day'          => 'required|string',
+            'subject'      => 'required|string',
+            'room'         => 'required|string',
+            'period_start' => 'required|integer|min:1',
+            'period_end'   => 'required|integer|min:1|gte:period_start',
+        ]);
+
+        $schedule = StudentSchedule::findOrFail($id);
+        $schedule->update($validated);
+
+        return redirect()->back()->with('success', 'Jadwal siswa telah diperbarui dan dikembalikan ke daftar aktif!');
     }
 
     public function destroy($id)

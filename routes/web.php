@@ -26,17 +26,26 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/schedule', [ScheduleController::class, 'create']);
 
 Route::post('/schedule',[ScheduleController::class, 'create_process'])->name('schedule-create');
+Route::get('/schedule/{id}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');
+Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
 Route::delete('/schedule/{id}',[ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
 // Student schedules
 Route::get('/student-schedule', [StudentScheduleController::class, 'index'])->name('student-schedule.index');
 Route::post('/student-schedule', [StudentScheduleController::class, 'store'])->name('student-schedule.store');
+Route::get('/student-schedule/{id}/edit', [StudentScheduleController::class, 'edit'])->name('student-schedule.edit');
+Route::put('/student-schedule/{id}', [StudentScheduleController::class, 'update'])->name('student-schedule.update');
 Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');
 
-Route::get('/announcement',[AnnouncementController::class, 'pengumuman']);
+Route::get('/announcement',[AnnouncementController::class, 'pengumuman'])->name('announcement.index');
 
 Route::post('/announcement',[AnnouncementController::class, 'database1'])->name('announcement.database1');
+Route::get('/announcement/{id}/edit',[AnnouncementController::class, 'edit'])->name('announcement.edit');
+Route::put('/announcement/{id}',[AnnouncementController::class, 'update'])->name('announcement.update');
 Route::delete('/announcement/{id}',[AnnouncementController::class, 'destroy'])->name('announcement.destroy');
+
+// History
+Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history.index');
 
 // Question sets
 Route::get('/questions',[QuestionController::class, 'index'])->name('questions.index');
