@@ -26,8 +26,21 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+<body class="font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200"
+      x-data="{ pageLoading: true }"
+      x-init="window.addEventListener('load', () => pageLoading = false)"
+      @beforeunload.window="pageLoading = true">
 
+    <!-- Global Loading Screen overlay -->
+    <div x-show="pageLoading"
+         x-transition.opacity.duration.300ms
+         class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white dark:bg-gray-900">
+        <svg class="animate-spin w-12 h-12 text-blue-600 mb-4" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Loading...</p>
+    </div>
     <div class="flex h-screen overflow-hidden" x-data="themeManager()">
 
         <!-- Sidebar -->

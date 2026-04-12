@@ -29,17 +29,27 @@ class ScheduleController extends Controller
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $schedules = Schedule::where('user_id', auth()->id())
-        ->where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())
-        ->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat')")
-        ->orderBy('start_time')
-        ->get();
+        $query = Schedule::where('user_id', auth()->id())
+            ->where('updated_at', '>=', \Carbon\Carbon::now()->subWeek());
+            
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('subject', 'like', "%{$search}%")
+                  ->orWhere('class', 'like', "%{$search}%");
+            });
+        }
+        
+        $schedules = $query->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat')")
+            ->orderBy('start_time')
+            ->paginate(30)->withQueryString();
         
         $history = Schedule::where('user_id', auth()->id())
             ->where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
             ->latest('updated_at')
+            ->take(50)
             ->get()
             ->groupBy('day');
             

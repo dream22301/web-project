@@ -10,9 +10,21 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::latest()->get();
+        $query = Student::latest();
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('nis', 'like', "%{$search}%")
+                  ->orWhere('class_major', 'like', "%{$search}%");
+            });
+        }
+        
+        $students = $query->paginate(10)->withQueryString();
+        
         return view('student.index', compact('students'));
     }
 

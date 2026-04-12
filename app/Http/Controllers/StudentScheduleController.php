@@ -7,17 +7,27 @@ use Illuminate\Http\Request;
 
 class StudentScheduleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-        $schedules = StudentSchedule::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())
-            ->get()
-            ->sortBy(fn($s) => [array_search($s->day, $dayOrder), $s->period_start])
-            ->groupBy('day');
+        $query = StudentSchedule::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek());
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('subject', 'like', "%{$search}%")
+                  ->orWhere('room', 'like', "%{$search}%");
+            });
+        }
+            
+        $schedules = $query->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')")
+            ->orderBy('period_start')
+            ->paginate(30)->withQueryString();
             
         $history = StudentSchedule::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
             ->latest('updated_at')
+            ->take(50)
             ->get()
             ->groupBy('day');
 

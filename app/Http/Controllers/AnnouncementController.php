@@ -21,9 +21,24 @@ class AnnouncementController extends Controller
         return redirect()->back()->with('success', 'Pengumuman telah dibuat!');
         
     }
-    public function pengumuman() {
-        $announcements = Announcement::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())->latest()->get();
-        $history = Announcement::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())->latest('updated_at')->get();
+    public function pengumuman(Request $request) {
+        $query = Announcement::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek())->latest();
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%");
+            });
+        }
+        
+        $announcements = $query->paginate(10)->withQueryString();
+        
+        $history = Announcement::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
+                               ->latest('updated_at')
+                               ->take(50)
+                               ->get();
+                               
         return view('announcement', compact('announcements', 'history'));
     }
 

@@ -143,9 +143,23 @@
 
             {{-- Published Schedules grouped by day --}}
             <div class="space-y-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Jadwal Terpublish</h2>
-                    <span class="text-sm text-gray-400 dark:text-gray-500">{{ $schedules->flatten()->count() }} total</span>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Jadwal Terpublish</h2>
+                        <span class="text-sm text-gray-400 dark:text-gray-500">{{ $schedules->total() }} total</span>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <form action="{{ route('student-schedule.index') }}" method="GET" class="relative w-full sm:w-64">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <input type="text" name="search" value="{{ request('search') }}"
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 sm:text-sm transition-colors"
+                               placeholder="Cari jadwal...">
+                    </form>
                 </div>
 
                 @if($schedules->isEmpty())
@@ -156,9 +170,12 @@
                         <p class="text-sm text-gray-400 dark:text-gray-500">Belum ada jadwal siswa. Tambahkan jadwal di atas.</p>
                     </div>
                 @else
+                    @php
+                        $groupedSchedules = collect($schedules->items())->groupBy('day');
+                    @endphp
                     <div class="space-y-6">
                         @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] as $dayName)
-                            @if(isset($schedules[$dayName]))
+                            @if(isset($groupedSchedules[$dayName]))
                             <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                                 {{-- Day Header --}}
                                 <div class="flex items-center gap-3 px-5 py-3 bg-blue-50 dark:bg-blue-900/30 border-b border-blue-100 dark:border-blue-800">
@@ -166,11 +183,11 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
                                     <h3 class="text-sm font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">{{ $dayName }}</h3>
-                                    <span class="ml-auto text-xs text-blue-500 dark:text-blue-400">{{ $schedules[$dayName]->count() }} pelajaran</span>
+                                    <span class="ml-auto text-xs text-blue-500 dark:text-blue-400">{{ $groupedSchedules[$dayName]->count() }} pelajaran</span>
                                 </div>
 
                                 <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                                    @foreach($schedules[$dayName]->sortBy('period_start') as $schedule)
+                                    @foreach($groupedSchedules[$dayName]->sortBy('period_start') as $schedule)
                                     <div class="flex items-center justify-between gap-4 px-5 py-4">
                                         {{-- Period Badge --}}
                                         <div class="shrink-0 flex items-center justify-center w-12 h-12 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 font-bold text-sm leading-tight text-center">
@@ -219,6 +236,10 @@
                             </div>
                             @endif
                         @endforeach
+                    </div>
+                    
+                    <div class="mt-4">
+                        {{ $schedules->links() }}
                     </div>
                 @endif
             </div>

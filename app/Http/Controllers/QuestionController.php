@@ -11,12 +11,21 @@ use Illuminate\Support\Str;
 class QuestionController extends Controller
 {
     /** List only the logged-in user's question sets */
-    public function index()
+    public function index(Request $request)
     {
-        $questionSets = QuestionSet::where('user_id', Auth::id())
+        $query = QuestionSet::where('user_id', Auth::id())
             ->withCount('questions')
-            ->latest()
-            ->get();
+            ->latest();
+            
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('key_code', 'like', "%{$search}%");
+            });
+        }
+            
+        $questionSets = $query->paginate(10)->withQueryString();
 
         return view('questions.index', compact('questionSets'));
     }
