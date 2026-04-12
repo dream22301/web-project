@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StudentScheduleController;
+use App\Http\Controllers\StudentController;
 
 Route::get('/login', function() { return view('auth.login'); })->name('login');
 
@@ -37,6 +38,8 @@ Route::get('/student-schedule/{id}/edit', [StudentScheduleController::class, 'ed
 Route::put('/student-schedule/{id}', [StudentScheduleController::class, 'update'])->name('student-schedule.update');
 Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');
 
+// Students
+Route::resource('student', StudentController::class)->only(['index', 'store', 'destroy']);
 Route::get('/announcement',[AnnouncementController::class, 'pengumuman'])->name('announcement.index');
 
 Route::post('/announcement',[AnnouncementController::class, 'database1'])->name('announcement.database1');
