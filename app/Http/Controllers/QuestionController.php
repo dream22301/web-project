@@ -31,7 +31,7 @@ class QuestionController extends Controller
 
         $keyCode = $request->filled('key_code')
             ? strtoupper(trim($request->key_code))
-            : strtoupper(Str::random(8));
+            : strtoupper(Str::random(4));
 
         QuestionSet::create([
             'user_id'  => Auth::id(),
