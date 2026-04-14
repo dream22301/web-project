@@ -34,7 +34,7 @@
     <!-- Global Loading Screen overlay -->
     <div x-show="pageLoading"
          x-transition.opacity.duration.300ms
-         class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white dark:bg-gray-900">
+         class="fixed inset-0 z-9999 flex flex-col items-center justify-center bg-white dark:bg-gray-900">
         <svg class="animate-spin w-12 h-12 text-blue-600 mb-4" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>

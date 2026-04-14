@@ -26,7 +26,7 @@ class AuthController extends Controller
     public function register_process(Request $request) {
         $validate2 = $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:10|confirmed'
         ]);
 
@@ -34,6 +34,7 @@ class AuthController extends Controller
             'name' => $validate2['name'],
             'email' => $validate2['email'],
             'password' => bcrypt($validate2['password']),
+            'role' => 'user',
         ]);
 
         if (Auth::attempt($validate2)) {
