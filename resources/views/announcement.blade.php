@@ -153,7 +153,7 @@
             </div>
 
             {{-- Announcements List --}}
-            <div class="mt-8 mb-8">
+            <div class="mt-8 mb-8" id="announcement-list">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                     <div class="flex items-center gap-3">
                         <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Published Announcements</h2>

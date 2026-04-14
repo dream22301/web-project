@@ -32,7 +32,7 @@ class AnnouncementController extends Controller
             });
         }
         
-        $announcements = $query->paginate(5)->withQueryString();
+        $announcements = $query->paginate(5)->withQueryString()->fragment('announcement-list');
         
         $history = Announcement::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
                                ->latest('updated_at')
