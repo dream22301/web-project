@@ -44,7 +44,8 @@ class ScheduleController extends Controller
         
         $schedules = $query->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat')")
             ->orderBy('start_time')
-            ->paginate(5)->withQueryString();
+            ->paginate(5)->withQueryString()
+            ->fragment('schedule_list');
         
         $history = Schedule::where('user_id', auth()->id())
             ->where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
