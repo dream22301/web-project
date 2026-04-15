@@ -124,9 +124,9 @@
                             <div>
                                 <h4 class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $schedule->subject }} - {{ $schedule->class }}</h4>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                                    {{ \Carbon\Carbon::parse($schedule->start_time)->format('H:i') }}
+                                    Jam pelajaran ke-{{ $schedule->start_time }}
                                     @if($schedule->end_time)
-                                        - {{ \Carbon\Carbon::parse($schedule->end_time)->format('H:i') }}
+                                        sampai ke-{{ $schedule->end_time }}
                                     @endif
                                 </p>
                             </div>
