@@ -13,5 +13,10 @@ class Student extends Model
         'name',
         'nis',
         'class_major',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 }

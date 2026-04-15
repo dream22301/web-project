@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nis')->unique();
             $table->string('class_major');
+            $table->string('password');
             $table->timestamps();
         });
     }

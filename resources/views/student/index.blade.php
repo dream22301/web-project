@@ -79,6 +79,17 @@
                                           {{ $errors->has('class_major') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
                             @error('class_major') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
                         </div>
+
+                        {{-- Password --}}
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                            <input type="password" id="password" name="password"
+                                   placeholder="Minimal 6 karakter"
+                                   required
+                                   class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
+                                          {{ $errors->has('password') ? 'ring-red-400 dark:ring-red-500' : 'ring-gray-300 dark:ring-gray-600' }}">
+                            @error('password') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                        </div>
                     </div>
 
                     <div class="mt-8 flex items-center justify-end">
@@ -131,6 +142,7 @@
                                     <th scope="col" class="px-6 py-3">NIS</th>
                                     <th scope="col" class="px-6 py-3">Nama Lengkap</th>
                                     <th scope="col" class="px-6 py-3">Kelas/Jurusan</th>
+                                    <th scope="col" class="px-6 py-3">Password</th>
                                     <th scope="col" class="px-6 py-3 text-right">Aksi</th>
                                 </tr>
                             </thead>
@@ -147,6 +159,18 @@
                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300">
                                             {{ $student->class_major }}
                                         </span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if($student->password)
+                                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                                </svg>
+                                                Set
+                                            </span>
+                                        @else
+                                            <span class="text-xs text-gray-400 dark:text-gray-500">—</span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 text-right">
                                         <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus siswa ini?');" class="inline-block">

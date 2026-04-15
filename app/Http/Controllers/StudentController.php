@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -34,15 +35,19 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'nis' => 'required|string|max:255|unique:students,nis',
+            'name'        => 'required|string|max:255',
+            'nis'         => 'required|string|max:255|unique:students,nis',
             'class_major' => 'required|string|max:255',
+            'password'    => 'required|string|min:6',
         ]);
+
+        $validated['password'] = Hash::make($validated['password']);
 
         Student::create($validated);
 
         return redirect()->route('student.index')->with('success', 'Student registered successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.

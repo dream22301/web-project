@@ -16,6 +16,9 @@ class ScheduleFactory extends Factory
      */
     public function definition(): array
     {
+
+        $start_time = fake()->numberBetween(1, 12);
+
         return [
             'user_id' => 1,
             'subject' => fake()->randomElement([
@@ -44,8 +47,8 @@ class ScheduleFactory extends Factory
                 'Kamis',
                 'Jumat'
             ]),
-            'start_time' => fake()->numberBetween(1, 12),
-            'end_time' => fake()->numberBetween(1, 12),
+            'start_time' => $start_time,
+            'end_time' => fake()->numberBetween($start_time + 1, 12),
         ];
     }
 }
