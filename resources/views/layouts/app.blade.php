@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Teacher Dashboard') | SMA Negeri 1</title>
+    <title>@yield('title', 'Teacher Dashboard') | SMKN 1 Lumajang</title>
 
     <!-- Anti-flicker: apply dark class BEFORE any CSS renders -->
     <script>
