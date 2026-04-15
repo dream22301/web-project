@@ -51,7 +51,7 @@
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Hari</label>
                             <div class="flex flex-wrap gap-4">
-                                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'] as $day)
+                                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat',] as $day)
                                 <div class="flex items-center">
                                     <input id="day-{{ strtolower($day) }}" name="day" type="radio" value="{{ $day }}"
                                            class="h-4 w-4 border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-blue-600 dark:bg-gray-700"
