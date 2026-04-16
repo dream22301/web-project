@@ -13,23 +13,25 @@ class StudentScheduleController extends Controller
     /**
      * Return the student schedules that match the authenticated student's class_major.
      *
-     * The Flutter app sends the student's NIS + password in the request body.
+     * The Flutter app sends the student's NIS + password as query params.
      * We verify the credentials, then return only schedules for that student's class.
      *
-     * POST /api/student-schedule
-     * Body: { "nis": "12345", "password": "secret" }
+     * GET /api/student-schedule?nis=12345&password=secret
      */
     public function index(Request $request)
     {
-        $request->validate([
-            'nis'      => 'required|string',
+        $validated = $request->validate([
+            'nis' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // Find student by NIS
-        $student = Student::where('nis', $request->nis)->first();
+        $nis = $validated['nis'];
+        $password = $validated['password'];
 
-        if (! $student || ! Hash::check($request->password, $student->password)) {
+        // Find student by NIS
+        $student = Student::where('nis', $nis)->first();
+
+        if (! $student || ! Hash::check($password, $student->password)) {
             return response()->json([
                 'message' => 'NIS atau password salah.',
             ], 401);
@@ -42,9 +44,9 @@ class StudentScheduleController extends Controller
             ->get();
 
         return response()->json([
-            'student'   => [
-                'name'        => $student->name,
-                'nis'         => $student->nis,
+            'student' => [
+                'name' => $student->name,
+                'nis' => $student->nis,
                 'class_major' => $student->class_major,
             ],
             'schedules' => $schedules,

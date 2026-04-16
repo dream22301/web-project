@@ -2,21 +2,23 @@
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\SettingsController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\StudentScheduleController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentScheduleController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/login', function() { return view('auth.login'); })->name('login');
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/register', function() {
+Route::get('/register', function () {
     return view('auth.register');
 });
 
@@ -26,10 +28,10 @@ Route::post('/login', [AuthController::class, 'login_process'])->name('log-in');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/schedule', [ScheduleController::class, 'create']);
 
-Route::post('/schedule',[ScheduleController::class, 'create_process'])->name('schedule-create');
+Route::post('/schedule', [ScheduleController::class, 'create_process'])->name('schedule-create');
 Route::get('/schedule/{id}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');
 Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
-Route::delete('/schedule/{id}',[ScheduleController::class, 'destroy'])->name('schedule.destroy');
+Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
 // Student schedules
 Route::get('/student-schedule', [StudentScheduleController::class, 'index'])->name('student-schedule.index');
@@ -40,26 +42,28 @@ Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'dest
 
 // Students
 Route::resource('student', StudentController::class)->only(['index', 'store', 'destroy']);
-Route::get('/announcement',[AnnouncementController::class, 'pengumuman'])->name('announcement.index');
+Route::get('/announcement', [AnnouncementController::class, 'pengumuman'])->name('announcement.index');
 
-Route::post('/announcement',[AnnouncementController::class, 'database1'])->name('announcement.database1');
-Route::get('/announcement/{id}/edit',[AnnouncementController::class, 'edit'])->name('announcement.edit');
-Route::put('/announcement/{id}',[AnnouncementController::class, 'update'])->name('announcement.update');
-Route::delete('/announcement/{id}',[AnnouncementController::class, 'destroy'])->name('announcement.destroy');
+Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
+Route::get('/announcement/{id}/edit', [AnnouncementController::class, 'edit'])->name('announcement.edit');
+Route::put('/announcement/{id}', [AnnouncementController::class, 'update'])->name('announcement.update');
+Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 
 // History
 Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history.index');
 
 // Question sets
-Route::get('/questions',[QuestionController::class, 'index'])->name('questions.index');
-Route::post('/questions',[QuestionController::class, 'store'])->name('questions.store');
-Route::get('/questions/{id}',[QuestionController::class, 'show'])->name('questions.show');
-Route::post('/questions/{id}/questions',[QuestionController::class, 'addQuestion'])->name('questions.addQuestion');
-Route::delete('/questions/{id}/questions/{qid}',[QuestionController::class, 'destroyQuestion'])->name('questions.destroyQuestion');
-Route::delete('/questions/{id}',[QuestionController::class, 'destroy'])->name('questions.destroy');
+Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
+Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
+Route::get('/questions/{id}', [QuestionController::class, 'show'])->name('questions.show');
+Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
+Route::post('/questions/{id}/questions', [QuestionController::class, 'addQuestion'])->name('questions.addQuestion');
+Route::put('/questions/{id}/questions/{qid}', [QuestionController::class, 'updateQuestion'])->name('questions.updateQuestion');
+Route::delete('/questions/{id}/questions/{qid}', [QuestionController::class, 'destroyQuestion'])->name('questions.destroyQuestion');
+Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
 // Settings & Logout
-Route::get('/settings',[SettingsController::class, 'index'])->name('settings');
-Route::post('/settings/profile',[SettingsController::class, 'updateProfile'])->name('settings.profile');
-Route::post('/settings/password',[SettingsController::class, 'updatePassword'])->name('settings.password');
-Route::post('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile');
+Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
