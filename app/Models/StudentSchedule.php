@@ -10,6 +10,7 @@ class StudentSchedule extends Model
         'day',
         'subject',
         'room',
+        'class_major',
         'period_start',
         'period_end',
     ];
