@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('day');
             $table->string('subject');
             $table->string('room');
+            $table->string('class_major');               // e.g. "XI RPL"
             $table->unsignedTinyInteger('period_start'); // jam pelajaran ke-X
             $table->unsignedTinyInteger('period_end');   // jam pelajaran ke-X
             $table->timestamps();

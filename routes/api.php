@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ScheduleController;
+use App\Http\Controllers\Api\StudentScheduleController;
 use App\Models\Announcement;
 use App\Models\Schedule;
 use App\Models\User;
@@ -13,4 +14,7 @@ Route::get('/test', function() {
 });
 
 Route::get('schedule', [ScheduleController::class, 'index']);
+
+// Student schedules — filtered by the student's own class_major
+Route::post('student-schedule', [StudentScheduleController::class, 'index']);
 

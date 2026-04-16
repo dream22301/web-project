@@ -92,6 +92,20 @@
                             @error('room') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
                         </div>
 
+                        {{-- Kelas / Jurusan --}}
+                        <div>
+                            <label for="class_major" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kelas / Jurusan</label>
+                            <select id="class_major" name="class_major"
+                                    class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
+                                           {{ $errors->has('class_major') ? 'ring-red-400 dark:ring-red-500' : '' }}">
+                                <option value="">Pilih kelas...</option>
+                                @foreach(['X RPL', 'XI RPL', 'XII RPL'] as $cls)
+                                <option value="{{ $cls }}" {{ old('class_major') == $cls ? 'selected' : '' }}>{{ $cls }}</option>
+                                @endforeach
+                            </select>
+                            @error('class_major') <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p> @enderror
+                        </div>
+
                         {{-- Jam Pelajaran --}}
                         <div>
                             <label for="period_start" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Dari Jam Pelajaran Ke</label>
@@ -196,7 +210,12 @@
 
                                         {{-- Info --}}
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{{ $schedule->subject }}</p>
+                                            <div class="flex flex-wrap items-center gap-2 mb-0.5">
+                                                <p class="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{{ $schedule->subject }}</p>
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400">
+                                                    {{ $schedule->class_major }}
+                                                </span>
+                                            </div>
                                             <div class="flex items-center gap-1 mt-0.5">
                                                 <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>

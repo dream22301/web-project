@@ -40,6 +40,7 @@ class StudentScheduleController extends Controller
             'day'          => 'required|string',
             'subject'      => 'required|string',
             'room'         => 'required|string',
+            'class_major'  => 'required|string',
             'period_start' => 'required|integer|min:1',
             'period_end'   => 'required|integer|min:1|gte:period_start',
         ]);
@@ -61,6 +62,7 @@ class StudentScheduleController extends Controller
             'day'          => 'required|string',
             'subject'      => 'required|string',
             'room'         => 'required|string',
+            'class_major'  => 'required|string',
             'period_start' => 'required|integer|min:1',
             'period_end'   => 'required|integer|min:1|gte:period_start',
         ]);
