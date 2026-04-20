@@ -23,7 +23,8 @@ class StudentScheduleController extends Controller
             
         $schedules = $query->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')")
             ->orderBy('period_start')
-            ->paginate(30)->withQueryString();
+            ->paginate(10)->withQueryString()
+            ->fragment('student_schedule');
             
         $history = StudentSchedule::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
             ->latest('updated_at')
