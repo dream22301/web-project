@@ -16,25 +16,30 @@ class QuestionController extends Controller
         $query = QuestionSet::where('user_id', Auth::id())
             ->withCount('questions')
             ->latest();
-            
+
         if ($request->filled('search')) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('key_code', 'like', "%{$search}%");
+                    ->orWhere('key_code', 'like', "%{$search}%");
             });
         }
-            
+
         $questionSets = $query->paginate(10)->withQueryString();
 
-        return view('questions.index', compact('questionSets'));
+        $editingSet = null;
+        if ($request->filled('edit')) {
+            $editingSet = QuestionSet::where('user_id', Auth::id())->find($request->edit);
+        }
+
+        return view('questions.index', compact('questionSets', 'editingSet'));
     }
 
     /** Create a new question set owned by the logged-in user */
     public function store(Request $request)
     {
         $request->validate([
-            'title'    => 'required|string|min:3|max:100',
+            'title' => 'required|string|min:3|max:100',
             'key_code' => 'nullable|string|max:50|unique:question_sets,key_code',
         ]);
 
@@ -43,23 +48,28 @@ class QuestionController extends Controller
             : strtoupper(Str::random(4));
 
         QuestionSet::create([
-            'user_id'  => Auth::id(),
-            'title'    => $request->title,
+            'user_id' => Auth::id(),
+            'title' => $request->title,
             'key_code' => $keyCode,
         ]);
 
         return redirect()->route('questions.index')
-            ->with('success', 'Question set created with key: ' . $keyCode);
+            ->with('success', 'Question set created with key: '.$keyCode);
     }
 
     /** Show a question set — only if it belongs to the logged-in user */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $set = QuestionSet::where('user_id', Auth::id())
             ->with('questions')
             ->findOrFail($id);
 
-        return view('questions.show', compact('set'));
+        $editingQuestion = null;
+        if ($request->filled('edit')) {
+            $editingQuestion = Question::where('question_set_id', $set->id)->find($request->edit);
+        }
+
+        return view('questions.show', compact('set', 'editingQuestion'));
     }
 
     /** Add a question to a set — owner only */
@@ -68,22 +78,22 @@ class QuestionController extends Controller
         $set = QuestionSet::where('user_id', Auth::id())->findOrFail($id);
 
         $request->validate([
-            'question_text'  => 'required|string|min:5',
-            'option_a'       => 'required|string|max:255',
-            'option_b'       => 'required|string|max:255',
-            'option_c'       => 'required|string|max:255',
-            'option_d'       => 'required|string|max:255',
+            'question_text' => 'required|string|min:5',
+            'option_a' => 'required|string|max:255',
+            'option_b' => 'required|string|max:255',
+            'option_c' => 'required|string|max:255',
+            'option_d' => 'required|string|max:255',
             'correct_answer' => 'required|in:a,b,c,d',
         ]);
 
         Question::create([
             'question_set_id' => $set->id,
-            'question_text'   => $request->question_text,
-            'option_a'        => $request->option_a,
-            'option_b'        => $request->option_b,
-            'option_c'        => $request->option_c,
-            'option_d'        => $request->option_d,
-            'correct_answer'  => $request->correct_answer,
+            'question_text' => $request->question_text,
+            'option_a' => $request->option_a,
+            'option_b' => $request->option_b,
+            'option_c' => $request->option_c,
+            'option_d' => $request->option_d,
+            'correct_answer' => $request->correct_answer,
         ]);
 
         return redirect()->route('questions.show', $id)
@@ -103,6 +113,28 @@ class QuestionController extends Controller
             ->with('success', 'Question deleted.');
     }
 
+    /** Update question set title and key_code — owner only */
+    public function update(Request $request, $id)
+    {
+        $set = QuestionSet::where('user_id', Auth::id())->findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|min:3|max:100',
+            'key_code' => 'nullable|string|max:50|unique:question_sets,key_code,'.$id,
+        ]);
+
+        $keyCode = $request->filled('key_code')
+            ? strtoupper(trim($request->key_code))
+            : $set->key_code;
+
+        $set->update([
+            'title' => $request->title,
+            'key_code' => $keyCode,
+        ]);
+
+        return redirect()->back()->with('success', 'Question set updated.');
+    }
+
     /** Delete an entire question set — owner only */
     public function destroy($id)
     {
@@ -110,5 +142,33 @@ class QuestionController extends Controller
 
         return redirect()->route('questions.index')
             ->with('success', 'Question set deleted.');
+    }
+
+    /** Update a question — owner only */
+    public function updateQuestion(Request $request, $id, $qid)
+    {
+        $set = QuestionSet::where('user_id', Auth::id())->findOrFail($id);
+        $question = Question::where('question_set_id', $set->id)->findOrFail($qid);
+
+        $request->validate([
+            'question_text' => 'required|string|min:5',
+            'option_a' => 'required|string|max:255',
+            'option_b' => 'required|string|max:255',
+            'option_c' => 'required|string|max:255',
+            'option_d' => 'required|string|max:255',
+            'correct_answer' => 'required|in:a,b,c,d',
+        ]);
+
+        $question->update([
+            'question_text' => $request->question_text,
+            'option_a' => $request->option_a,
+            'option_b' => $request->option_b,
+            'option_c' => $request->option_c,
+            'option_d' => $request->option_d,
+            'correct_answer' => $request->correct_answer,
+        ]);
+
+        return redirect()->route('questions.show', $id)
+            ->with('success', 'Question updated.');
     }
 }
