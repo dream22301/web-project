@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\StudentController;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,7 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'role' => RoleMiddleware::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (AuthenticationException $e, Request $request) {
@@ -25,3 +30,5 @@ return Application::configure(basePath: dirname(__DIR__))
             return redirect()->guest(route('login'))->with('message', 'Please login first to access this page.');
         });
     })->create();
+    
+
