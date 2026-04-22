@@ -13,22 +13,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_photo',
-    ];
-
-    protected $guarded = [
         'role',
-        'is_admin',
+        'profile_photo',
     ];
 
     protected $hidden = [
         'password',
     ];
 
-    public function setPasswordAttribute($value): void
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
 
     public function isAdmin(): bool
     {
