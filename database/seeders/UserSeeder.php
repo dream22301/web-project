@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'role' => 'user'
         ]);
         User::factory(10)->create([
-            'role' => 'user'
+            'role' => 'student'
         ]);
     }
 }

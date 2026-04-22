@@ -156,7 +156,7 @@
             </div>
 
             {{-- Published Schedules grouped by day --}}
-            <div class="space-y-6">
+            <div class="space-y-6" id="student_schedule">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                     <div class="flex items-center gap-3">
                         <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Jadwal Terpublish</h2>

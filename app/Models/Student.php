@@ -13,10 +13,14 @@ class Student extends Model
         'name',
         'nis',
         'class_major',
-        'password',
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    protected function setPasswordAttribute($value): void
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
