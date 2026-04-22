@@ -41,14 +41,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/student-schedule/{id}', [StudentScheduleController::class, 'update'])->name('student-schedule.update');
     Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');
 
-    // Students
-    Route::resource('student', StudentController::class)->only(['index', 'store', 'destroy']);
+    // Students (Moved to role middleware below)
     Route::get('/announcement', [AnnouncementController::class, 'pengumuman'])->name('announcement.index');
 
-    Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
+    // Route::post('/announcement', ...) moved to role middleware below
     Route::get('/announcement/{id}/edit', [AnnouncementController::class, 'edit'])->name('announcement.edit');
     Route::put('/announcement/{id}', [AnnouncementController::class, 'update'])->name('announcement.update');
-    Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
+    // Route::delete('/announcement/{id}', ...) moved to role middleware below
 
     // History
     Route::get('/history', [\App\Http\Controllers\HistoryController::class, 'index'])->name('history.index');
@@ -68,4 +67,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile');
     Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'role:superadmin,admin'])->group(function () {
+    Route::resource('student', StudentController::class)->only(['index', 'store', 'destroy']);
+    Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
+    Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 });
