@@ -71,6 +71,8 @@
                     Dashboard
                 </a>
 
+                @can('view-exclusive-page')
+                    
                 <a href="{{ url('/schedule') }}"
                    class="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
                    {{ request()->is('schedule*') ? 'pointer-events-none bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}">
@@ -79,6 +81,7 @@
                     </svg>
                     Schedule
                 </a>
+                @endcan
 
                 <a href="{{ url('/announcement') }}"
                    class="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
@@ -92,8 +95,9 @@
                 
 
                 {{-- ── Student ── --}}
+                @can('view-exclusive-page')
                 <p class="px-3 mt-4 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">Student</p>
-
+                
                 <a href="{{ route('student.index') }}"
                    class="flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
                    {{ request()->is('student') || request()->is('student/*') ? 'pointer-events-none bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white' }}">
@@ -120,6 +124,7 @@
                     </svg>
                     Questions
                 </a>
+                @endcan
 
                 {{-- ── System ── --}}
                 <p class="px-3 mt-4 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">System</p>

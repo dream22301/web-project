@@ -42,7 +42,7 @@ class StudentFactory extends Factory
             'name' => fake()->randomElement($names),
             'nis' => fake()->unique()->numerify('########'),
             'class_major' => fake()->randomElement($classMajors),
-            'password' => bcrypt('password'),
+            'password' => 'password',
         ];
     }
 }
