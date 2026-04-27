@@ -41,8 +41,8 @@ class StudentController extends Controller
             'password'    => 'required|string|min:6',
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
-
+        // The Student model has a setPasswordAttribute mutator that automatically hashes passwords.
+        // Therefore, we just pass the plain validated password directly.
         Student::create($validated);
 
         return redirect()->route('student.index')->with('success', 'Student registered successfully.');
