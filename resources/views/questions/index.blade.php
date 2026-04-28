@@ -7,7 +7,7 @@
     {{-- Flash Messages --}}
     @if(session('success'))
     <div class="mb-6 flex items-center gap-3 px-4 py-3 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 text-green-800 dark:text-green-300 text-sm font-medium">
-        <svg class="w-5 h-5 flex-shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         {{ session('success') }}
@@ -66,7 +66,7 @@
 
             @if($errors->any())
             <div class="flex items-start gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-800 dark:text-red-300 text-sm">
-                <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <ul class="list-disc list-inside space-y-0.5">
@@ -127,7 +127,7 @@
     </div>
 
     {{-- Question Sets List --}}
-    <div class="max-w-3xl">
+    <div class="max-w-3xl" id="question-list">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div class="flex items-center gap-3">
                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Your Question Sets</h2>
@@ -167,7 +167,7 @@
                     </div>
                     <p class="text-xs text-gray-400 dark:text-gray-500">{{ $set->questions_count }} question{{ $set->questions_count !== 1 ? 's' : '' }} · Created {{ $set->created_at->format('d M Y') }}</p>
                 </div>
-                <div class="flex items-center gap-2 flex-shrink-0">
+                <div class="flex items-center gap-2 shrink-0">
                     <a href="{{ route('questions.index', ['edit' => $set->id]) }}"
                        class="p-1.5 rounded-md text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 dark:hover:text-yellow-400 dark:hover:bg-yellow-900/30 transition-colors" title="Edit set">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
