@@ -6,8 +6,8 @@
 
     <!-- Page Header -->
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Historical Records</h1>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">View archived items older than 1 week. Edit an item to restore it.</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Catatan Riwayat</h1>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Lihat item yang diarsipkan lebih dari 1 minggu. Edit item untuk memulihkannya.</p>
     </div>
 
     <!-- Alpine Tabs -->
@@ -17,7 +17,7 @@
             <button @click="activeTab = 'announcements'"
                     :class="{ 'text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400': activeTab === 'announcements', 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'announcements' }"
                     class="py-3 px-4 border-b-2 font-medium text-sm transition-colors whitespace-nowrap">
-                Announcements
+                Pengumuman
                 <span class="ml-2 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                     {{ $announcements->count() }}
                 </span>
@@ -26,7 +26,7 @@
             <button @click="activeTab = 'schedules'"
                     :class="{ 'text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400': activeTab === 'schedules', 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'schedules' }"
                     class="py-3 px-4 border-b-2 font-medium text-sm transition-colors whitespace-nowrap">
-                Teacher Schedules
+                Jadwal Guru
                 <span class="ml-2 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                     {{ $schedules->flatten()->count() }}
                 </span>
@@ -35,7 +35,7 @@
             <button @click="activeTab = 'studentSchedules'"
                     :class="{ 'text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400': activeTab === 'studentSchedules', 'text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'studentSchedules' }"
                     class="py-3 px-4 border-b-2 font-medium text-sm transition-colors whitespace-nowrap">
-                Student Schedules
+                Jadwal Siswa
                 <span class="ml-2 inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                     {{ $studentSchedules->flatten()->count() }}
                 </span>
@@ -52,7 +52,7 @@
                         <svg class="mx-auto w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
-                        <p class="text-sm text-gray-400 dark:text-gray-500">No archived announcements.</p>
+                        <p class="text-sm text-gray-400 dark:text-gray-500">Tidak ada pengumuman yang diarsipkan.</p>
                     </div>
                 @else
                     <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
@@ -67,13 +67,13 @@
                                 </div>
                                 <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">{{ $announcement->content }}</p>
                                 <p class="mt-1 text-xs text-red-500 dark:text-red-400">
-                                    Archived (Last updated: {{ $announcement->updated_at->diffForHumans() }})
+                                    Diarsipkan (Terakhir diperbarui: {{ $announcement->updated_at->diffForHumans() }})
                                 </p>
                             </div>
                             <div class="shrink-0 flex items-center gap-2">
                                 <a href="{{ route('announcement.edit', $announcement->id) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-md dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60 transition-colors">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                    Restore / Edit
+                                    Pulihkan / Edit
                                 </a>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         <svg class="mx-auto w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
-                        <p class="text-sm text-gray-400 dark:text-gray-500">No archived teacher schedules.</p>
+                        <p class="text-sm text-gray-400 dark:text-gray-500">Tidak ada jadwal guru yang diarsipkan.</p>
                     </div>
                 @else
                     <div class="space-y-6">
@@ -103,12 +103,12 @@
                                     @foreach($schedules[$dayName]->sortBy('start_time') as $schedule)
                                     <div class="flex items-center justify-between gap-4 px-5 py-4 opacity-75 hover:opacity-100 transition-opacity">
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $schedule->subject }} <span class="ml-2 font-normal text-gray-500 dark:text-gray-400">Class {{ $schedule->class }}</span></p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Period: {{ $schedule->start_time }} - {{ $schedule->end_time }}</p>
+                                            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $schedule->subject }} <span class="ml-2 font-normal text-gray-500 dark:text-gray-400">Kelas {{ $schedule->class }}</span></p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Jam: {{ $schedule->start_time }} - {{ $schedule->end_time }}</p>
                                         </div>
                                         <div class="shrink-0">
                                             <a href="{{ route('schedule.edit', $schedule->id) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-md dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60 transition-colors">
-                                                Restore / Edit
+                                                Pulihkan / Edit
                                             </a>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                         <svg class="mx-auto w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                         </svg>
-                        <p class="text-sm text-gray-400 dark:text-gray-500">No archived student schedules.</p>
+                        <p class="text-sm text-gray-400 dark:text-gray-500">Tidak ada jadwal siswa yang diarsipkan.</p>
                     </div>
                 @else
                     <div class="space-y-6">
@@ -143,11 +143,11 @@
                                     <div class="flex items-center justify-between gap-4 px-5 py-4 opacity-75 hover:opacity-100 transition-opacity">
                                         <div class="flex-1 min-w-0">
                                             <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $schedule->subject }}</p>
-                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Room: {{ $schedule->room }} &bull; Period: {{ $schedule->period_start }} - {{ $schedule->period_end }}</p>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Ruang: {{ $schedule->room }} &bull; Jam: {{ $schedule->period_start }} - {{ $schedule->period_end }}</p>
                                         </div>
                                         <div class="shrink-0">
                                             <a href="{{ route('student-schedule.edit', $schedule->id) }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-md dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60 transition-colors">
-                                                Restore / Edit
+                                                Pulihkan / Edit
                                             </a>
                                         </div>
                                     </div>

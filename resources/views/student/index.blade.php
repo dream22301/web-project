@@ -85,7 +85,7 @@
 
                         {{-- Password --}}
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kata Sandi</label>
                             <input type="password" id="password" name="password"
                                    placeholder="Minimal 6 karakter"
                                    required
@@ -146,7 +146,7 @@
                                     <th scope="col" class="px-6 py-3">NIS</th>
                                     <th scope="col" class="px-6 py-3">Nama Lengkap</th>
                                     <th scope="col" class="px-6 py-3">Kelas/Jurusan</th>
-                                    <th scope="col" class="px-6 py-3">Password</th>
+                                    <th scope="col" class="px-6 py-3">Kata Sandi</th>
                                     <th scope="col" class="px-6 py-3 text-right">Aksi</th>
                                 </tr>
                             </thead>
@@ -170,7 +170,7 @@
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                                                 </svg>
-                                                Set
+                                                Diatur
                                             </span>
                                         @else
                                             <span class="text-xs text-gray-400 dark:text-gray-500">—</span>

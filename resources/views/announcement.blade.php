@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Announcement')
+@section('title', 'Pengumuman')
 
 @section('content')
 
@@ -21,7 +21,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         <div>
-            <p class="font-medium mb-1">Please fix the following errors:</p>
+            <p class="font-medium mb-1">Harap perbaiki kesalahan berikut:</p>
             <ul class="list-disc list-inside space-y-0.5">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -34,8 +34,8 @@
 
     <!-- Page Header -->
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Announcements</h1>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Create and publish announcements for your students.</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Pengumuman</h1>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Buat dan terbitkan pengumuman untuk siswa Anda.</p>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-8 items-start">
@@ -45,7 +45,7 @@
             <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
 
                 <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700">
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">New Announcement</h3>
+                    <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Pengumuman Baru</h3>
                 </div>
 
                 <form action="{{ route('announcement.database1') }}" method="POST" class="p-6 sm:p-8 space-y-6">
@@ -54,9 +54,9 @@
                     <!-- Title -->
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Title
+                            Judul
                         </label>
-                        <input type="text" id="title" name="title" placeholder="e.g. School Holiday Notice" value="{{ old('title') }}"
+                        <input type="text" id="title" name="title" placeholder="contoh: Pemberitahuan Libur Sekolah" value="{{ old('title') }}"
                                class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 text-sm transition-colors
                                       {{ $errors->has('title') ? 'ring-red-400 dark:ring-red-500 focus:ring-red-500' : 'ring-gray-300 dark:ring-gray-600 focus:ring-blue-600' }}">
                         @error('title')
@@ -67,16 +67,16 @@
                     <!-- Target Audience -->
                     <div>
                         <label for="audience" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Target Audience
+                            Target Peserta
                         </label>
                         <select id="audience" name="audience"
                                 class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset focus:ring-2 text-sm transition-colors
                                        {{ $errors->has('audience') ? 'ring-red-400 dark:ring-red-500 focus:ring-red-500' : 'ring-gray-300 dark:ring-gray-600 focus:ring-blue-600' }}">
-                            <option value="">Select audience...</option>
-                            <option value="all" {{ old('audience') == 'all' ? 'selected' : '' }}>All Students</option>
-                            <option value="x"   {{ old('audience') == 'x'   ? 'selected' : '' }}>Grade X</option>
-                            <option value="xi"  {{ old('audience') == 'xi'  ? 'selected' : '' }}>Grade XI</option>
-                            <option value="xii" {{ old('audience') == 'xii' ? 'selected' : '' }}>Grade XII</option>
+                            <option value="">Pilih target...</option>
+                            <option value="all" {{ old('audience') == 'all' ? 'selected' : '' }}>Semua Siswa</option>
+                            <option value="x"   {{ old('audience') == 'x'   ? 'selected' : '' }}>Kelas X</option>
+                            <option value="xi"  {{ old('audience') == 'xi'  ? 'selected' : '' }}>Kelas XI</option>
+                            <option value="xii" {{ old('audience') == 'xii' ? 'selected' : '' }}>Kelas XII</option>
                         </select>
                         @error('audience')
                             <p class="mt-1.5 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
@@ -85,13 +85,13 @@
 
                     <!-- Priority -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Priority</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Prioritas</label>
                         <div class="flex flex-wrap gap-4">
                             @foreach([
                                 ['value' => 0,  'label' => 'Normal',  'color' => 'text-gray-600 dark:text-gray-300'],
                                 ['value' => 1,    'label' => 'Info',    'color' => 'text-blue-600 dark:text-blue-400'],
-                                ['value' => 2, 'label' => 'Warning', 'color' => 'text-amber-600 dark:text-amber-400'],
-                                ['value' => 3,  'label' => 'Urgent',  'color' => 'text-red-600 dark:text-red-400'],
+                                ['value' => 2, 'label' => 'Peringatan', 'color' => 'text-amber-600 dark:text-amber-400'],
+                                ['value' => 3,  'label' => 'Penting',  'color' => 'text-red-600 dark:text-red-400'],
                             ] as $p)
                             <div class="flex items-center">
                                 <input id="priority-{{ $p['value'] }}" name="prioritas" type="radio" value="{{ $p['value'] }}"
@@ -111,10 +111,10 @@
                     <!-- Content -->
                     <div>
                         <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Content
+                            Konten
                         </label>
                         <textarea id="content" name="content" rows="6"
-                                  placeholder="Write your announcement here..."
+                                  placeholder="Tulis pengumuman Anda di sini..."
                                   class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 text-sm transition-colors resize-none
                                          {{ $errors->has('content') ? 'ring-red-400 dark:ring-red-500 focus:ring-red-500' : 'ring-gray-300 dark:ring-gray-600 focus:ring-blue-600' }}">{{ old('content') }}</textarea>
                         @error('content')
@@ -125,7 +125,7 @@
                     <!-- Publish Date -->
                     <div>
                         <label for="publish_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            Publish Date
+                            Tanggal Publikasi
                         </label>
                         <div class="relative max-w-xs">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -145,7 +145,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            Publish Announcement
+                            Terbitkan Pengumuman
                         </button>
                     </div>
 
@@ -156,8 +156,8 @@
             <div class="mt-8 mb-8" id="announcement-list">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                     <div class="flex items-center gap-3">
-                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Published Announcements</h2>
-                        <span class="text-sm text-gray-400 dark:text-gray-500">{{ $announcements->total() }} total</span>
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Pengumuman Terpublikasi</h2>
+                        <span class="text-sm text-gray-400 dark:text-gray-500">Total {{ $announcements->total() }}</span>
                     </div>
 
                     <!-- Search Bar -->
@@ -169,7 +169,7 @@
                         </div>
                         <input type="text" name="search" value="{{ request('search') }}"
                                class="block w-full pl-10 pr-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 sm:text-sm transition-colors"
-                               placeholder="Search announcements...">
+                               placeholder="Cari pengumuman...">
                     </form>
                 </div>
 
@@ -178,7 +178,7 @@
                         <svg class="mx-auto w-10 h-10 text-gray-300 dark:text-gray-600 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
-                        <p class="text-sm text-gray-400 dark:text-gray-500">No announcements yet. Create your first one above.</p>
+                        <p class="text-sm text-gray-400 dark:text-gray-500">Belum ada pengumuman. Buat pengumuman pertama Anda di atas.</p>
                     </div>
                 @else
                     <div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
@@ -187,8 +187,8 @@
                             $priorityConfig = [
                                 0 => ['label' => 'Normal',  'class' => 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'],
                                 1 => ['label' => 'Info',    'class' => 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400'],
-                                2 => ['label' => 'Warning', 'class' => 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400'],
-                                3 => ['label' => 'Urgent',  'class' => 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400'],
+                                2 => ['label' => 'Peringatan', 'class' => 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400'],
+                                3 => ['label' => 'Penting',  'class' => 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400'],
                             ][$announcement->prioritas] ?? ['label' => 'Normal', 'class' => 'bg-gray-100 text-gray-600'];
                         @endphp
                         <div class="flex items-start justify-between gap-4 px-5 py-4">
@@ -214,18 +214,18 @@
                             <div class="flex items-center gap-2">
                                 <a href="{{ route('announcement.edit', $announcement->id) }}" 
                                    class="shrink-0 p-2 rounded-md text-gray-400 hover:text-blue-600 hover:bg-blue-50 dark:hover:text-blue-400 dark:hover:bg-blue-900/30 transition-colors"
-                                   title="Edit announcement">
+                                   title="Edit pengumuman">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </a>
                                 <form action="{{ route('announcement.destroy', $announcement->id) }}" method="POST"
-                                      onsubmit="return confirm('Delete this announcement?')">
+                                      onsubmit="return confirm('Hapus pengumuman ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
                                             class="shrink-0 p-2 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-900/30 transition-colors"
-                                            title="Delete announcement">
+                                            title="Hapus pengumuman">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
@@ -251,15 +251,15 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        History Panel
+                        Panel Riwayat
                     </h3>
-                    <span class="text-xs text-gray-400">{{ $history->count() }} items</span>
+                    <span class="text-xs text-gray-400">{{ $history->count() }} item</span>
                 </div>
                 
                 <div class="p-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
                     @if($history->isEmpty())
                         <div class="text-center py-6">
-                            <p class="text-xs text-gray-400 dark:text-gray-500">No archived items over 1 week old.</p>
+                            <p class="text-xs text-gray-400 dark:text-gray-500">Tidak ada item yang diarsipkan lebih dari 1 minggu.</p>
                         </div>
                     @else
                         <div class="space-y-4">
@@ -268,8 +268,8 @@
                                 <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{{ $item->title }}</h4>
                                 <p class="text-xs text-gray-500 mt-1 line-clamp-2">{{ $item->content }}</p>
                                 <div class="mt-3 flex items-center justify-between">
-                                    <span class="text-[10px] text-gray-400">Updated: {{ $item->updated_at->diffForHumans() }}</span>
-                                    <a href="{{ route('announcement.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Restore / Edit</a>
+                                    <span class="text-[10px] text-gray-400">Diperbarui: {{ $item->updated_at->diffForHumans() }}</span>
+                                    <a href="{{ route('announcement.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Pulihkan / Edit</a>
                                 </div>
                             </div>
                             @endforeach

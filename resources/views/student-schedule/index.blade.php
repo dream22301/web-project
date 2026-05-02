@@ -272,15 +272,15 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        History Panel
+                        Panel Riwayat
                     </h3>
-                    <span class="text-xs text-gray-400">{{ $history->flatten()->count() }} items</span>
+                    <span class="text-xs text-gray-400">{{ $history->flatten()->count() }} item</span>
                 </div>
                 
                 <div class="p-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
                     @if($history->isEmpty())
                         <div class="text-center py-6">
-                            <p class="text-xs text-gray-400 dark:text-gray-500">No archived schedules over 1 week old.</p>
+                            <p class="text-xs text-gray-400 dark:text-gray-500">Tidak ada jadwal yang diarsipkan lebih dari 1 minggu.</p>
                         </div>
                     @else
                         <div class="space-y-4">
@@ -295,7 +295,7 @@
                                             <p class="text-xs text-gray-500 mt-1">Ruang: {{ $item->room }} &bull; Jam: {{ $item->period_start }}-{{ $item->period_end }}</p>
                                             <div class="mt-3 flex items-center justify-between">
                                                 <span class="text-[10px] text-gray-400">{{ $item->updated_at->diffForHumans() }}</span>
-                                                <a href="{{ route('student-schedule.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Restore / Edit</a>
+                                                <a href="{{ route('student-schedule.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Pulihkan / Edit</a>
                                             </div>
                                         </div>
                                         @endforeach
