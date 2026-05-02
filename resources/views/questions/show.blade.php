@@ -7,7 +7,7 @@
     {{-- Flash Messages --}}
     @if(session('success'))
     <div class="mb-6 flex items-center gap-3 px-4 py-3 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 text-green-800 dark:text-green-300 text-sm font-medium">
-        <svg class="w-5 h-5 flex-shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         {{ session('success') }}
@@ -37,7 +37,7 @@
                 <div class="space-y-3">
                     @foreach(['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D'] as $key => $label)
                     <div class="flex items-center gap-3">
-                        <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-bold flex items-center justify-center">
+                        <span class="shrink-0 w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-bold flex items-center justify-center">
                             {{ $label }}
                         </span>
                         <input type="text" name="option_{{ $key }}" value="{{ $editingQuestion->{'option_' . $key} }}" required
@@ -98,7 +98,7 @@
 
                 @if($errors->any())
                 <div class="flex items-start gap-3 px-4 py-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-800 dark:text-red-300 text-sm">
-                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
                     <ul class="list-disc list-inside space-y-0.5">
@@ -124,7 +124,7 @@
                         @foreach(['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D'] as $key => $label)
                         <div class="flex items-center gap-3">
                             {{-- Option letter badge --}}
-                            <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-bold flex items-center justify-center">
+                            <span class="shrink-0 w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm font-bold flex items-center justify-center">
                                 {{ $label }}
                             </span>
                             <input type="text" name="option_{{ $key }}" value="{{ old('option_' . $key) }}"
@@ -182,7 +182,7 @@
                     {{-- Question header --}}
                     <div class="flex items-start justify-between gap-4 px-5 py-4 border-b border-gray-100 dark:border-gray-700">
                         <div class="flex items-start gap-3 flex-1">
-                            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold flex items-center justify-center mt-0.5">
+                            <span class="shrink-0 w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-bold flex items-center justify-center mt-0.5">
                                 {{ $index + 1 }}
                             </span>
                             <p class="text-sm font-medium text-gray-900 dark:text-gray-100 leading-relaxed">{{ $question->question_text }}</p>
@@ -213,7 +213,7 @@
                                     {{ $question->correct_answer === $key
                                         ? 'bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700'
                                         : 'bg-gray-50 dark:bg-gray-700/50' }}">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-md text-xs font-bold flex items-center justify-center
+                            <span class="shrink-0 w-6 h-6 rounded-md text-xs font-bold flex items-center justify-center
                                          {{ $question->correct_answer === $key
                                             ? 'bg-green-500 text-white'
                                             : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300' }}">
@@ -223,7 +223,7 @@
                                 {{ $text }}
                             </span>
                             @if($question->correct_answer === $key)
-                            <svg class="w-4 h-4 ml-auto text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-auto text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                             @endif
