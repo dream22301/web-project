@@ -217,5 +217,95 @@
         }
     </script>
 
+    <!-- SweetAlert2 Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Global Toast Configuration
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            // Trigger Laravel Flash Messages as Toasts
+            @if(session('success'))
+                Toast.fire({
+                    icon: 'success',
+                    title: "{!! addslashes(session('success')) !!}"
+                });
+            @endif
+
+            @if(session('error'))
+                Toast.fire({
+                    icon: 'error',
+                    title: "{!! addslashes(session('error')) !!}"
+                });
+            @endif
+
+            // Intercept forms for Delete and Edit confirmations
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                const onsubmitAttr = form.getAttribute('onsubmit');
+                const methodInput = form.querySelector('input[name="_method"]');
+                
+                // 1. Check if it's a DELETE form (has native confirm)
+                if (onsubmitAttr && onsubmitAttr.includes('return confirm')) {
+                    const match = onsubmitAttr.match(/confirm\(['"](.*?)['"]\)/);
+                    const message = match ? match[1] : 'Are you sure you want to proceed?';
+                    
+                    form.removeAttribute('onsubmit'); // Remove the native alert
+                    
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Confirmation',
+                            text: message,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#ef4444',
+                            cancelButtonColor: '#6b7280',
+                            confirmButtonText: 'Yes, proceed!',
+                            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                            color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                } 
+                // 2. Check if it's an EDIT form (PUT/PATCH method)
+                else if (methodInput && (methodInput.value.toUpperCase() === 'PUT' || methodInput.value.toUpperCase() === 'PATCH')) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Confirm Edit',
+                            text: 'Are you sure you want to save these changes?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3b82f6', // Tailwind blue-500
+                            cancelButtonColor: '#6b7280',
+                            confirmButtonText: 'Yes, save changes!',
+                            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+                            color: document.documentElement.classList.contains('dark') ? '#f3f4f6' : '#111827',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
