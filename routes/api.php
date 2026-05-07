@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AnnouncementController;
 use App\Http\Controllers\Api\NextSubjectController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\ScheduleController;
 use App\Http\Controllers\Api\StudentAuthController;
 use App\Http\Controllers\Api\StudentProfileController;
@@ -31,6 +32,12 @@ Route::prefix('mobile')->group(function () {
     // Next subject (cross-reference Jadwal Mengajar + Jadwal Siswa):
     // GET /api/mobile/next-subject?nis=…&password=…
     Route::get('next-subject', [NextSubjectController::class, 'index']);
+
+    // Question sets list: GET /api/mobile/questions
+    Route::get('questions', [QuestionController::class, 'index']);
+
+    // Single question set with all questions: GET /api/mobile/questions/{id}
+    Route::get('questions/{id}', [QuestionController::class, 'show']);
 });
 
 // ──────────────────────────────────────────────────────────────────────────────
