@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
-@section('title', 'Register')
-@section('header', 'Register a new account')
+@section('title', 'Daftar')
+@section('header', 'Daftar akun baru')
 
 @section('content')
 
@@ -35,7 +35,7 @@
         {{-- Full Name --}}
         <div>
             <label for="name" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                Full name
+                Nama lengkap
             </label>
             <div class="mt-2">
                 <input id="name" name="name" type="text" autocomplete="name" value="{{ old('name') }}"
@@ -48,7 +48,7 @@
         {{-- Email --}}
         <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                Email address
+                Alamat Email
             </label>
             <div class="mt-2">
                 <input id="email" name="email" type="email" autocomplete="email" value="{{ old('email') }}"
@@ -61,7 +61,7 @@
         {{-- Password --}}
         <div>
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                Password
+                Kata Sandi
             </label>
             <div class="mt-2">
                 <input id="password" name="password" type="password" autocomplete="new-password"
@@ -74,7 +74,7 @@
         {{-- Confirm Password --}}
         <div>
             <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
-                Confirm password
+                Konfirmasi kata sandi
             </label>
             <div class="mt-2">
                 <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="new-password"
@@ -86,7 +86,7 @@
         <div>
             <button type="submit"
                     class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors">
-                Register
+                Daftar
             </button>
         </div>
     </form>
@@ -94,8 +94,8 @@
 @endsection
 
 @section('footer')
-    Already have an account? 
+    Sudah punya akun? 
     <a href="{{ url('/') }}" class="font-semibold leading-6 text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-        Sign in instead
+        Masuk di sini
     </a>
 @endsection

@@ -39,6 +39,8 @@ class StudentController extends Controller
             'nis'         => 'required|string|max:255|unique:students,nis',
             'class_major' => 'required|string|max:255',
             'password'    => 'required|string|min:6',
+        ], [
+            'nis.unique' => 'Maaf Nis sudah dipakai anak lain'
         ]);
 
         // The Student model has a setPasswordAttribute mutator that automatically hashes passwords.

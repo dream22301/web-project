@@ -99,7 +99,7 @@
                                     class="block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
                                            {{ $errors->has('class_major') ? 'ring-red-400 dark:ring-red-500' : '' }}">
                                 <option value="">Pilih kelas...</option>
-                                @foreach(['X RPL', 'XI RPL', 'XII RPL'] as $cls)
+                                @foreach(['X Teknik Kimia Industri 1', 'X Teknik Kimia Industri 2', 'X Geomatika', 'X Rekayasa Perangkat Lunak', 'X Teknik Komputer dan Jaringan 1', 'X Teknik Komputer dan Jaringan 2', 'X Bisnis Digital 1', 'X Bisnis Digital 2', 'X Bisnis Retail', 'X Manajemen Perkantoran 1', 'X Manajemen Perkantoran 2', 'X Akuntansi 1', 'X Akuntansi 2', 'X Akuntansi 3', 'X Teknik Grafika 1', 'X Teknik Grafika 2', 'X Produksi & Siaran Program Televisi 1', 'X Produksi & Siaran Program Televisi 2', 'XI Teknik Kimia Industri 1', 'XI Teknik Kimia Industri 2', 'XI Geomatika', 'XI Rekayasa Perangkat Lunak', 'XI Teknik Komputer dan Jaringan 1', 'XI Teknik Komputer dan Jaringan 2', 'XI Bisnis Digital 1', 'XI Bisnis Digital 2', 'XI Bisnis Retail', 'XI Manajemen Perkantoran 1', 'XI Manajemen Perkantoran 2', 'XI Akuntansi 1', 'XI Akuntansi 2', 'XI Akuntansi 3', 'XI Teknik Grafika 1', 'XI Teknik Grafika 2', 'XI Produksi & Siaran Program Televisi 1', 'XI Produksi & Siaran Program Televisi 2'] as $cls)
                                 <option value="{{ $cls }}" {{ old('class_major') == $cls ? 'selected' : '' }}>{{ $cls }}</option>
                                 @endforeach
                             </select>
@@ -264,50 +264,7 @@
             </div>
         </div>
 
-        <!-- Right Column: History Panel -->
-        <div class="w-full lg:w-80 shrink-0">
-            <div class="bg-gray-50/50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700">
-                <div class="px-5 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-                    <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        History Panel
-                    </h3>
-                    <span class="text-xs text-gray-400">{{ $history->flatten()->count() }} items</span>
-                </div>
-                
-                <div class="p-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                    @if($history->isEmpty())
-                        <div class="text-center py-6">
-                            <p class="text-xs text-gray-400 dark:text-gray-500">No archived schedules over 1 week old.</p>
-                        </div>
-                    @else
-                        <div class="space-y-4">
-                            @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] as $dayName)
-                                @if(isset($history[$dayName]))
-                                <div class="mb-2">
-                                    <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">{{ $dayName }}</h4>
-                                    <div class="space-y-2">
-                                        @foreach($history[$dayName] as $item)
-                                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 opacity-70 hover:opacity-100 transition-opacity">
-                                            <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{{ $item->subject }}</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Ruang: {{ $item->room }} &bull; Jam: {{ $item->period_start }}-{{ $item->period_end }}</p>
-                                            <div class="mt-3 flex items-center justify-between">
-                                                <span class="text-[10px] text-gray-400">{{ $item->updated_at->diffForHumans() }}</span>
-                                                <a href="{{ route('student-schedule.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Restore / Edit</a>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
+
     </div>
 
 @endsection

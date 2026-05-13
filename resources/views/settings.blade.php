@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Settings')
+@section('title', 'Pengaturan')
 
 @section('content')
 
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Settings</h1>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your profile and account security.</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Pengaturan</h1>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Kelola profil dan keamanan akun Anda.</p>
     </div>
 
     <div class="max-w-2xl space-y-8">
@@ -14,7 +14,7 @@
         {{-- ── Profile Card ─────────────────────────────────────── --}}
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
             <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700">
-                <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Edit Profile</h3>
+                <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Edit Profil</h3>
             </div>
 
             @if(session('success_profile'))
@@ -36,7 +36,7 @@
                              class="w-20 h-20 rounded-full object-cover ring-4 ring-gray-100 dark:ring-gray-700">
                         <label for="profile_photo"
                                class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center cursor-pointer shadow-md transition-colors"
-                               title="Upload photo">
+                               title="Unggah foto">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -56,7 +56,7 @@
                 {{-- Name --}}
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Display Name
+                        Nama Tampilan
                     </label>
                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
@@ -67,7 +67,7 @@
                 <div class="flex justify-end">
                     <button type="submit"
                             class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors">
-                        Save Profile
+                        Simpan Profil
                     </button>
                 </div>
             </form>
@@ -76,7 +76,7 @@
         {{-- ── Change Password Card ──────────────────────────────── --}}
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transition-colors">
             <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700">
-                <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Change Password</h3>
+                <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">Ubah Kata Sandi</h3>
             </div>
 
             @if(session('success_password'))
@@ -97,14 +97,14 @@
                 @csrf
 
                 <div>
-                    <label for="current_password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Current Password</label>
+                    <label for="current_password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kata Sandi Saat Ini</label>
                     <input type="password" id="current_password" name="current_password"
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
                                   {{ $errors->has('current_password') ? 'ring-red-400 dark:ring-red-500' : '' }}">
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">New Password</label>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Kata Sandi Baru</label>
                     <input type="password" id="password" name="password"
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors
                                   {{ $errors->has('password') ? 'ring-red-400 dark:ring-red-500' : '' }}">
@@ -112,7 +112,7 @@
                 </div>
 
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm New Password</label>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Konfirmasi Kata Sandi Baru</label>
                     <input type="password" id="password_confirmation" name="password_confirmation"
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm transition-colors">
                 </div>
@@ -120,7 +120,7 @@
                 <div class="flex justify-end">
                     <button type="submit"
                             class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors">
-                        Change Password
+                        Ubah Kata Sandi
                     </button>
                 </div>
             </form>

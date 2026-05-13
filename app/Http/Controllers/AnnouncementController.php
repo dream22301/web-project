@@ -66,4 +66,9 @@ class AnnouncementController extends Controller
         Announcement::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Pengumuman telah dihapus!');
     }
+
+    public function clearHistory() {
+        Announcement::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())->delete();
+        return redirect()->back()->with('success', 'Semua riwayat pengumuman telah dihapus!');
+    }
 }

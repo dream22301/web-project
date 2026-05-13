@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AnnouncementController;
+use App\Http\Controllers\Api\NextSubjectController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\ScheduleController;
 use App\Http\Controllers\Api\StudentAuthController;
+use App\Http\Controllers\Api\StudentProfileController;
 use App\Http\Controllers\Api\StudentScheduleController;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
@@ -14,12 +17,27 @@ Route::prefix('mobile')->group(function () {
     // Student login: POST /api/mobile/student/login
     Route::post('student/login', [StudentAuthController::class, 'login']);
 
-    // Public announcements: GET /api/mobile/announcements
+    // Student profile refresh: GET /api/mobile/student/profile?nis=…&password=…
+    Route::get('student/profile', [StudentProfileController::class, 'show']);
+
+    // Public announcements list: GET /api/mobile/announcements
     Route::get('announcements', [AnnouncementController::class, 'index']);
 
-    // Student schedules (validates NIS+password internally):
-    // GET /api/mobile/student-schedule?nis=…&password=…
+    // Single announcement detail: GET /api/mobile/announcements/{id}
+    Route::get('announcements/{id}', [AnnouncementController::class, 'show']);
+
+    // Student schedules: GET /api/mobile/student-schedule?nis=…&password=…
     Route::get('student-schedule', [StudentScheduleController::class, 'index']);
+
+    // Next subject (cross-reference Jadwal Mengajar + Jadwal Siswa):
+    // GET /api/mobile/next-subject?nis=…&password=…
+    Route::get('next-subject', [NextSubjectController::class, 'index']);
+
+    // Question sets list: GET /api/mobile/questions
+    Route::get('questions', [QuestionController::class, 'index']);
+
+    // Single question set with all questions: GET /api/mobile/questions/{id}
+    Route::get('questions/{id}', [QuestionController::class, 'show']);
 });
 
 // ──────────────────────────────────────────────────────────────────────────────

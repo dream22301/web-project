@@ -78,5 +78,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:superadmin,admin'])->group(function () {
     Route::resource('student', StudentController::class)->only(['index', 'store', 'destroy']);
     Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
+    Route::delete('/announcement/history/clear', [AnnouncementController::class, 'clearHistory'])->name('announcement.clearHistory');
     Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 });

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Dasbor')
 
 @section('content')
 
     <!-- Page Header -->
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Welcome back! Here's a quick overview of today.</p>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Dasbor</h1>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Selamat datang kembali! Berikut ringkasan singkat untuk hari ini.</p>
     </div>
 
     <!-- Quick Stats -->
@@ -23,7 +23,7 @@
                         </svg>
                     </div>
                     <div class="ml-5 w-0 flex-1">
-                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Users</dt>
+                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Pengguna</dt>
                         <dd class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $totalUsers }}</dd>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         </svg>
                     </div>
                     <div class="ml-5 w-0 flex-1">
-                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Schedules</dt>
+                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Jadwal</dt>
                         <dd class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $totalSchedules }}</dd>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         </svg>
                     </div>
                     <div class="ml-5 w-0 flex-1">
-                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Announcements</dt>
+                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Pengumuman</dt>
                         <dd class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $totalAnnouncements }}</dd>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         </svg>
                     </div>
                     <div class="ml-5 w-0 flex-1">
-                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Questions</dt>
+                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Soal</dt>
                         <dd class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $totalQuestions }}</dd>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
         <!-- Today Announcements -->
         <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-100 dark:border-gray-700 transition-colors">
             <div class="p-5 border-b border-gray-200 dark:border-gray-700">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Today's Announcements</h3>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Pengumuman Hari Ini</h3>
             </div>
             <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                 @forelse($todayAnnouncements as $announcement)
@@ -106,7 +106,7 @@
                     </li>
                 @empty
                     <li class="p-5 text-center text-sm text-gray-500 dark:text-gray-400">
-                        No announcements for today.
+                        Tidak ada pengumuman untuk hari ini.
                     </li>
                 @endforelse
             </ul>
@@ -115,7 +115,7 @@
         <!-- Now Schedules -->
         <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg border border-gray-100 dark:border-gray-700 transition-colors">
             <div class="p-5 border-b border-gray-200 dark:border-gray-700">
-                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Now Schedules</h3>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">Jadwal Sekarang</h3>
             </div>
             <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                 @forelse($nowSchedules as $schedule)
@@ -139,7 +139,7 @@
                     </li>
                 @empty
                     <li class="p-5 text-center text-sm text-gray-500 dark:text-gray-400">
-                        No upcoming schedules for today.
+                        Tidak ada jadwal mendatang untuk hari ini.
                     </li>
                 @endforelse
             </ul>

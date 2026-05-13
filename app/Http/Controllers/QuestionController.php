@@ -25,7 +25,7 @@ class QuestionController extends Controller
             });
         }
 
-        $questionSets = $query->paginate(10)->withQueryString();
+        $questionSets = $query->paginate(5)->withQueryString()->fragment('question-list');
 
         $editingSet = null;
         if ($request->filled('edit')) {
