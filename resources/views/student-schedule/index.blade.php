@@ -264,50 +264,7 @@
             </div>
         </div>
 
-        <!-- Right Column: History Panel -->
-        <div class="w-full lg:w-80 shrink-0">
-            <div class="bg-gray-50/50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700">
-                <div class="px-5 py-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-                    <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        Panel Riwayat
-                    </h3>
-                    <span class="text-xs text-gray-400">{{ $history->flatten()->count() }} item</span>
-                </div>
-                
-                <div class="p-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
-                    @if($history->isEmpty())
-                        <div class="text-center py-6">
-                            <p class="text-xs text-gray-400 dark:text-gray-500">Tidak ada jadwal yang diarsipkan lebih dari 1 minggu.</p>
-                        </div>
-                    @else
-                        <div class="space-y-4">
-                            @foreach(['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'] as $dayName)
-                                @if(isset($history[$dayName]))
-                                <div class="mb-2">
-                                    <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">{{ $dayName }}</h4>
-                                    <div class="space-y-2">
-                                        @foreach($history[$dayName] as $item)
-                                        <div class="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 opacity-70 hover:opacity-100 transition-opacity">
-                                            <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{{ $item->subject }}</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Ruang: {{ $item->room }} &bull; Jam: {{ $item->period_start }}-{{ $item->period_end }}</p>
-                                            <div class="mt-3 flex items-center justify-between">
-                                                <span class="text-[10px] text-gray-400">{{ $item->updated_at->diffForHumans() }}</span>
-                                                <a href="{{ route('student-schedule.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Pulihkan / Edit</a>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
+
     </div>
 
 @endsection

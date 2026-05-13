@@ -253,7 +253,18 @@
                         </svg>
                         Panel Riwayat
                     </h3>
-                    <span class="text-xs text-gray-400">{{ $history->count() }} item</span>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs text-gray-400">{{ $history->count() }} item</span>
+                        @if($history->isNotEmpty())
+                        <form action="{{ route('announcement.clearHistory') }}" method="POST" onsubmit="return confirm('Hapus semua riwayat pengumuman secara permanen?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-xs font-medium text-red-600 dark:text-red-400 hover:text-red-500 transition-colors">
+                                Hapus Semua
+                            </button>
+                        </form>
+                        @endif
+                    </div>
                 </div>
                 
                 <div class="p-4 max-h-[calc(100vh-12rem)] overflow-y-auto">
@@ -269,7 +280,14 @@
                                 <p class="text-xs text-gray-500 mt-1 line-clamp-2">{{ $item->content }}</p>
                                 <div class="mt-3 flex items-center justify-between">
                                     <span class="text-[10px] text-gray-400">Diperbarui: {{ $item->updated_at->diffForHumans() }}</span>
-                                    <a href="{{ route('announcement.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Pulihkan / Edit</a>
+                                    <div class="flex items-center gap-3">
+                                        <a href="{{ route('announcement.edit', $item->id) }}" class="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-500">Pulihkan / Edit</a>
+                                        <form action="{{ route('announcement.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus pengumuman ini secara permanen?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-xs font-medium text-red-600 dark:text-red-400 hover:text-red-500">Hapus</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach
