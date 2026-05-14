@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
         // Schedule
         Route::get('/schedule', [ScheduleController::class, 'create']);
         Route::post('/schedule', [ScheduleController::class, 'create_process'])->name('schedule-create');
+        Route::delete('/schedule/clear', [ScheduleController::class, 'clearAll'])->name('schedule.clearAll');
         Route::get('/schedule/{id}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');
         Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
         Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
@@ -56,6 +57,7 @@ Route::middleware('auth')->group(function () {
         // Student Schedule
         Route::get('/student-schedule', [StudentScheduleController::class, 'index'])->name('student-schedule.index');
         Route::post('/student-schedule', [StudentScheduleController::class, 'store'])->name('student-schedule.store');
+        Route::delete('/student-schedule/clear', [StudentScheduleController::class, 'clearAll'])->name('student-schedule.clearAll');
         Route::get('/student-schedule/{id}/edit', [StudentScheduleController::class, 'edit'])->name('student-schedule.edit');
         Route::put('/student-schedule/{id}', [StudentScheduleController::class, 'update'])->name('student-schedule.update');
         Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');

@@ -163,17 +163,32 @@
                         <span class="text-sm text-gray-400 dark:text-gray-500">{{ $schedules->total() }} total</span>
                     </div>
 
-                    <!-- Search Bar -->
-                    <form action="{{ route('student-schedule.index') }}" method="GET" class="relative w-full sm:w-64">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <input type="text" name="search" value="{{ request('search') }}"
-                               class="block w-full pl-10 pr-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 sm:text-sm transition-colors"
-                               placeholder="Cari jadwal...">
-                    </form>
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        @if($schedules->total() > 0)
+                        <form action="{{ route('student-schedule.clearAll') }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus SEMUA jadwal siswa? Tindakan ini tidak dapat dibatalkan.')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="inline-flex items-center gap-2 rounded-md bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100 ring-1 ring-inset ring-red-200 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/40 dark:ring-red-900/50 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                                <span class="hidden sm:inline">Hapus Semua</span>
+                            </button>
+                        </form>
+                        @endif
+
+                        <!-- Search Bar -->
+                        <form action="{{ route('student-schedule.index') }}" method="GET" class="relative w-full sm:w-64">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                   class="block w-full pl-10 pr-3 py-2 border border-gray-200 dark:border-gray-700 rounded-md leading-5 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 sm:text-sm transition-colors"
+                                   placeholder="Cari jadwal...">
+                        </form>
+                    </div>
                 </div>
 
                 @if($schedules->isEmpty())

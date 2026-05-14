@@ -80,4 +80,11 @@ class StudentScheduleController extends Controller
 
         return redirect()->back()->with('success', 'Jadwal siswa berhasil dihapus!');
     }
+
+    public function clearAll()
+    {
+        StudentSchedule::query()->delete();
+
+        return redirect()->back()->with('success', 'Semua jadwal siswa berhasil dihapus!');
+    }
 }
