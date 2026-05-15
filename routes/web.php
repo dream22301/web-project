@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentScheduleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // ─── GUEST ROUTES ──────────────────────────────────────────────────────────
@@ -82,4 +83,8 @@ Route::middleware(['auth', 'role:superadmin,admin'])->group(function () {
     Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
     Route::delete('/announcement/history/clear', [AnnouncementController::class, 'clearHistory'])->name('announcement.clearHistory');
     Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
+
+    // User Management
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });

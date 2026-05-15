@@ -4,11 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\StudentSchedule;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class StudentScheduleSeeder extends Seeder
 {
     public function run(): void
     {
+        $teacher = User::first();
+
         $schedules = [
             ['day' => 'Senin', 'subject' => 'Konsen RPL', 'room' => 'R01', 'period_start' => 1, 'period_end' => 2],
             ['day' => 'Senin', 'subject' => 'Bahasa Indonesia', 'room' => 'R02', 'period_start' => 3, 'period_end' => 4],
@@ -27,6 +30,7 @@ class StudentScheduleSeeder extends Seeder
         foreach ($classMajors as $classMajor) {
             foreach ($schedules as $schedule) {
                 StudentSchedule::create([
+                    'teacher_id' => $teacher->id,
                     'day' => $schedule['day'],
                     'subject' => $schedule['subject'],
                     'room' => $schedule['room'],

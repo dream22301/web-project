@@ -11,7 +11,8 @@ class StudentScheduleController extends Controller
     {
         $dayOrder = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
-        $query = StudentSchedule::where('updated_at', '>=', \Carbon\Carbon::now()->subWeek());
+        $query = StudentSchedule::where('teacher_id', auth()->id())
+            ->where('updated_at', '>=', \Carbon\Carbon::now()->subWeek());
         
         if ($request->filled('search')) {
             $search = $request->search;
@@ -26,7 +27,8 @@ class StudentScheduleController extends Controller
             ->paginate(10)->withQueryString()
             ->fragment('student_schedule');
             
-        $history = StudentSchedule::where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
+        $history = StudentSchedule::where('teacher_id', auth()->id())
+            ->where('updated_at', '<', \Carbon\Carbon::now()->subWeek())
             ->latest('updated_at')
             ->take(50)
             ->get()
@@ -46,6 +48,7 @@ class StudentScheduleController extends Controller
             'period_end'   => 'required|integer|min:1|gte:period_start',
         ]);
 
+        $validated['teacher_id'] = auth()->id();
         StudentSchedule::create($validated);
 
         return redirect()->back()->with('success', 'Jadwal siswa berhasil ditambahkan!');
@@ -53,7 +56,7 @@ class StudentScheduleController extends Controller
 
     public function edit($id)
     {
-        $schedule = StudentSchedule::findOrFail($id);
+        $schedule = StudentSchedule::where('teacher_id', auth()->id())->findOrFail($id);
         return view('student-schedule.edit', compact('schedule'));
     }
 
@@ -68,7 +71,7 @@ class StudentScheduleController extends Controller
             'period_end'   => 'required|integer|min:1|gte:period_start',
         ]);
 
-        $schedule = StudentSchedule::findOrFail($id);
+        $schedule = StudentSchedule::where('teacher_id', auth()->id())->findOrFail($id);
         $schedule->update($validated);
 
         return redirect()->back()->with('success', 'Jadwal siswa telah diperbarui dan dikembalikan ke daftar aktif!');
@@ -76,14 +79,14 @@ class StudentScheduleController extends Controller
 
     public function destroy($id)
     {
-        StudentSchedule::findOrFail($id)->delete();
+        StudentSchedule::where('teacher_id', auth()->id())->findOrFail($id)->delete();
 
         return redirect()->back()->with('success', 'Jadwal siswa berhasil dihapus!');
     }
 
     public function clearAll()
     {
-        StudentSchedule::query()->delete();
+        StudentSchedule::where('teacher_id', auth()->id())->query()->delete();
 
         return redirect()->back()->with('success', 'Semua jadwal siswa berhasil dihapus!');
     }

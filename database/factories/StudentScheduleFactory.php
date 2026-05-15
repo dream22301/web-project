@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentSchedule>
@@ -17,6 +18,8 @@ class StudentScheduleFactory extends Factory
     public function definition(): array
     {
         return [
+            'teacher_id' => User::inRandomOrder()->first()?->id ?? 1,
+
             'day' => fake()->randomElement([
                 'Senin',
                 'Selasa',

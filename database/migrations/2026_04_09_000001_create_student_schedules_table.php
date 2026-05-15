@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('student_schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
             $table->string('day');
             $table->string('subject');
             $table->string('room');
