@@ -26,7 +26,7 @@ class QuestionController extends Controller
 
     /**
      * GET /api/mobile/questions/{id}
-     * Returns a single question set with all its questions (shuffled options).
+     * Returns a single question set with all its questions.
      */
     public function show(int $id)
     {
@@ -36,6 +36,32 @@ class QuestionController extends Controller
             return response()->json(['message' => 'Paket soal tidak ditemukan.'], 404);
         }
 
+        return response()->json($this->formatSet($set));
+    }
+
+    /**
+     * GET /api/mobile/questions/key/{key_code}
+     * Finds a question set by its key_code.
+     * Returns 404 with a message if the key is invalid.
+     */
+    public function findByKey(string $keyCode)
+    {
+        $set = QuestionSet::with('questions')
+            ->where('key_code', $keyCode)
+            ->first();
+
+        if (! $set) {
+            return response()->json(['message' => 'Kode soal tidak ditemukan. Periksa kembali kode yang kamu masukkan.'], 404);
+        }
+
+        return response()->json($this->formatSet($set));
+    }
+
+    /**
+     * Shared formatter for a QuestionSet with its questions.
+     */
+    private function formatSet(QuestionSet $set): array
+    {
         $questions = $set->questions->map(fn ($q) => [
             'id'             => $q->id,
             'question_text'  => $q->question_text,
@@ -46,11 +72,11 @@ class QuestionController extends Controller
             'correct_answer' => $q->correct_answer,
         ]);
 
-        return response()->json([
+        return [
             'id'        => $set->id,
             'title'     => $set->title,
             'key_code'  => $set->key_code,
             'questions' => $questions,
-        ]);
+        ];
     }
 }
