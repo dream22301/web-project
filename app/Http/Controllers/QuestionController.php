@@ -43,9 +43,13 @@ class QuestionController extends Controller
             'key_code' => 'nullable|string|max:50|unique:question_sets,key_code',
         ]);
 
-        $keyCode = $request->filled('key_code')
-            ? strtoupper(trim($request->key_code))
-            : strtoupper(Str::random(4));
+        if ($request->filled('key_code')) {
+            $keyCode = strtoupper(trim($request->key_code));
+        } else {
+            do {
+                $keyCode = strtoupper(Str::random(6));
+            } while (QuestionSet::where('key_code', $keyCode)->exists());
+        }
 
         QuestionSet::create([
             'user_id' => Auth::id(),
