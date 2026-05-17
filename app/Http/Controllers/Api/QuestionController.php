@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\QuestionSet;
+use App\Models\Student;
+use App\Models\StudentScore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class QuestionController extends Controller
 {
@@ -55,6 +58,38 @@ class QuestionController extends Controller
         }
 
         return response()->json($this->formatSet($set));
+    }
+
+    /**
+     * POST /api/mobile/questions/{id}/score
+     * Submits the student's score for the given question set.
+     */
+    public function submitScore(Request $request, int $id)
+    {
+        $request->validate([
+            'nis'      => 'required|string',
+            'password' => 'required|string',
+            'score'    => 'required|numeric',
+        ]);
+
+        $student = Student::where('nis', $request->nis)->first();
+
+        if (! $student || ! Hash::check($request->password, $student->password)) {
+            return response()->json(['message' => 'Autentikasi gagal. Silakan login kembali.'], 401);
+        }
+
+        $set = QuestionSet::find($id);
+        if (! $set) {
+            return response()->json(['message' => 'Paket soal tidak ditemukan.'], 404);
+        }
+
+        // Create or update the score (a student can only have 1 score per set)
+        StudentScore::updateOrCreate(
+            ['student_id' => $student->id, 'question_set_id' => $set->id],
+            ['score' => $request->score]
+        );
+
+        return response()->json(['message' => 'Skor berhasil disimpan.']);
     }
 
     /**

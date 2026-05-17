@@ -42,6 +42,9 @@ Route::prefix('mobile')->group(function () {
 
     // Single question set with all questions: GET /api/mobile/questions/{id}
     Route::get('questions/{id}', [QuestionController::class, 'show']);
+
+    // Submit student score: POST /api/mobile/questions/{id}/score
+    Route::post('questions/{id}/score', [QuestionController::class, 'submitScore']);
 });
 
 // ──────────────────────────────────────────────────────────────────────────────

@@ -171,4 +171,14 @@ class QuestionController extends Controller
         return redirect()->route('questions.show', $id)
             ->with('success', 'Question updated.');
     }
+
+    /** View student scores for a question set — owner only */
+    public function scores($id)
+    {
+        $set = QuestionSet::where('user_id', Auth::id())
+            ->with(['scores.student'])
+            ->findOrFail($id);
+
+        return view('questions.scores', compact('set'));
+    }
 }

@@ -168,6 +168,10 @@
                     <p class="text-xs text-gray-400 dark:text-gray-500">{{ $set->questions_count }} pertanyaan &bull; Dibuat {{ $set->created_at->format('d M Y') }}</p>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
+                    <a href="{{ route('questions.scores', $set->id) }}"
+                       class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors">
+                        Lihat Skor Murid
+                    </a>
                     <a href="{{ route('questions.index', ['edit' => $set->id]) }}"
                        class="p-1.5 rounded-md text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 dark:hover:text-yellow-400 dark:hover:bg-yellow-900/30 transition-colors" title="Edit paket">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
