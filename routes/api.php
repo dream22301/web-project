@@ -36,8 +36,15 @@ Route::prefix('mobile')->group(function () {
     // Question sets list: GET /api/mobile/questions
     Route::get('questions', [QuestionController::class, 'index']);
 
+    // Find question set by key code: GET /api/mobile/questions/key/{key_code}
+    // ⚠ Must be declared BEFORE questions/{id} so Laravel doesn't treat "key" as an id.
+    Route::get('questions/key/{key_code}', [QuestionController::class, 'findByKey']);
+
     // Single question set with all questions: GET /api/mobile/questions/{id}
     Route::get('questions/{id}', [QuestionController::class, 'show']);
+
+    // Submit student score: POST /api/mobile/questions/{id}/score
+    Route::post('questions/{id}/score', [QuestionController::class, 'submitScore']);
 });
 
 // ──────────────────────────────────────────────────────────────────────────────

@@ -9,7 +9,7 @@ class QuestionSet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title', 'key_code'];
+    protected $fillable = ['user_id', 'title', 'key_code', 'is_one_time'];
 
     public function user()
     {
@@ -19,5 +19,10 @@ class QuestionSet extends Model
     public function questions()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function scores()
+    {
+        return $this->hasMany(StudentScore::class);
     }
 }

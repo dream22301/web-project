@@ -24,4 +24,9 @@ class Student extends Model
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function scores()
+    {
+        return $this->hasMany(StudentScore::class);
+    }
 }

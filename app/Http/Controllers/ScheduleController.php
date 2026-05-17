@@ -92,4 +92,11 @@ class ScheduleController extends Controller
 
         return redirect()->back()->with('success', 'Jadwal berhasil dihapus!');
     }
+
+    public function clearAll()
+    {
+        Schedule::where('user_id', auth()->id())->delete();
+
+        return redirect()->back()->with('success', 'Semua jadwal berhasil dihapus!');
+    }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $userBlueprint->string('name');
             $userBlueprint->string('email')->unique();
             $userBlueprint->string('password');
-            $userBlueprint->string('role')->default('user');
+            $userBlueprint->string('role')->default('student');
             $userBlueprint->timestamps();
         });
     }

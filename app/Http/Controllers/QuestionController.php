@@ -51,6 +51,7 @@ class QuestionController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'key_code' => $keyCode,
+            'is_one_time' => $request->boolean('is_one_time'),
         ]);
 
         return redirect()->route('questions.index')
@@ -130,6 +131,7 @@ class QuestionController extends Controller
         $set->update([
             'title' => $request->title,
             'key_code' => $keyCode,
+            'is_one_time' => $request->boolean('is_one_time'),
         ]);
 
         return redirect()->back()->with('success', 'Question set updated.');
@@ -170,5 +172,15 @@ class QuestionController extends Controller
 
         return redirect()->route('questions.show', $id)
             ->with('success', 'Question updated.');
+    }
+
+    /** View student scores for a question set — owner only */
+    public function scores($id)
+    {
+        $set = QuestionSet::where('user_id', Auth::id())
+            ->with(['scores.student'])
+            ->findOrFail($id);
+
+        return view('questions.scores', compact('set'));
     }
 }

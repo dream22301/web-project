@@ -10,6 +10,7 @@ class StudentSchedule extends Model
     use HasFactory;
 
     protected $fillable = [
+        'teacher_id',
         'day',
         'subject',
         'room',
@@ -17,4 +18,8 @@ class StudentSchedule extends Model
         'period_start',
         'period_end',
     ];
+
+    public function teacher() {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
 }

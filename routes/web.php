@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentScheduleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // ─── GUEST ROUTES ──────────────────────────────────────────────────────────
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(function () {
         // Schedule
         Route::get('/schedule', [ScheduleController::class, 'create']);
         Route::post('/schedule', [ScheduleController::class, 'create_process'])->name('schedule-create');
+        Route::delete('/schedule/clear', [ScheduleController::class, 'clearAll'])->name('schedule.clearAll');
         Route::get('/schedule/{id}/edit', [ScheduleController::class, 'edit'])->name('schedule.edit');
         Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
         Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
@@ -56,6 +58,7 @@ Route::middleware('auth')->group(function () {
         // Student Schedule
         Route::get('/student-schedule', [StudentScheduleController::class, 'index'])->name('student-schedule.index');
         Route::post('/student-schedule', [StudentScheduleController::class, 'store'])->name('student-schedule.store');
+        Route::delete('/student-schedule/clear', [StudentScheduleController::class, 'clearAll'])->name('student-schedule.clearAll');
         Route::get('/student-schedule/{id}/edit', [StudentScheduleController::class, 'edit'])->name('student-schedule.edit');
         Route::put('/student-schedule/{id}', [StudentScheduleController::class, 'update'])->name('student-schedule.update');
         Route::delete('/student-schedule/{id}', [StudentScheduleController::class, 'destroy'])->name('student-schedule.destroy');
@@ -64,6 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
         Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
         Route::get('/questions/{id}', [QuestionController::class, 'show'])->name('questions.show');
+        Route::get('/questions/{id}/scores', [QuestionController::class, 'scores'])->name('questions.scores');
         Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
         Route::post('/questions/{id}/questions', [QuestionController::class, 'addQuestion'])->name('questions.addQuestion');
         Route::put('/questions/{id}/questions/{qid}', [QuestionController::class, 'updateQuestion'])->name('questions.updateQuestion');
@@ -80,4 +84,8 @@ Route::middleware(['auth', 'role:superadmin,admin'])->group(function () {
     Route::post('/announcement', [AnnouncementController::class, 'database1'])->name('announcement.database1');
     Route::delete('/announcement/history/clear', [AnnouncementController::class, 'clearHistory'])->name('announcement.clearHistory');
     Route::delete('/announcement/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
+
+    // User Management
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::put('/users/{id}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 });

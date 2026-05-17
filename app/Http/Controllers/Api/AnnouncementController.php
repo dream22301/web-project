@@ -10,11 +10,28 @@ class AnnouncementController extends Controller
 {
     /**
      * GET /api/mobile/announcements
-     * Returns all announcements ordered by newest first.
+     * Returns all announcements ordered by newest first, filtered by target and not in history.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Announcement::latest()->get());
+        $query = Announcement::latest()
+            ->where('updated_at', '>=', now()->subWeek());
+
+        if ($classMajor = $request->query('class_major')) {
+            $query->where(function ($q) use ($classMajor) {
+                $q->where('audience', 'all');
+                
+                if (str_starts_with($classMajor, 'XII ')) {
+                    $q->orWhere('audience', 'xii');
+                } elseif (str_starts_with($classMajor, 'XI ')) {
+                    $q->orWhere('audience', 'xi');
+                } elseif (str_starts_with($classMajor, 'X ')) {
+                    $q->orWhere('audience', 'x');
+                }
+            });
+        }
+
+        return response()->json($query->get());
     }
 
     /**
