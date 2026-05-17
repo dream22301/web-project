@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('key_code')->unique();
+            $table->boolean('is_one_time')->default(false);
             $table->timestamps();
         });
     }

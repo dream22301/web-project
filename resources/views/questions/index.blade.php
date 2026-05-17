@@ -39,6 +39,14 @@
                     <input type="text" id="edit_key_code" name="key_code" value="{{ $editingSet->key_code }}"
                            class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600 focus:ring-2 focus:ring-blue-600 text-sm font-mono">
                 </div>
+                <div class="flex items-center gap-3">
+                    <input type="hidden" name="is_one_time" value="0">
+                    <input type="checkbox" id="edit_is_one_time" name="is_one_time" value="1" {{ $editingSet->is_one_time ? 'checked' : '' }}
+                           class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="edit_is_one_time" class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Hanya 1x Pengerjaan (Siswa tidak bisa mengulang)
+                    </label>
+                </div>
                 <div class="flex justify-end gap-3 pt-2">
                     <a href="{{ route('questions.index') }}" class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors">Batal</a>
                     <button type="submit" class="inline-flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 transition-colors">
@@ -112,6 +120,15 @@
                         Acak: kosongkan untuk otomatis
                     </span>
                 </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <input type="hidden" name="is_one_time" value="0">
+                <input type="checkbox" id="is_one_time" name="is_one_time" value="1" {{ old('is_one_time') ? 'checked' : '' }}
+                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="is_one_time" class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Hanya 1x Pengerjaan (Siswa tidak bisa mengulang)
+                </label>
             </div>
 
             <div class="flex justify-end pt-1">

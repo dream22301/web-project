@@ -47,14 +47,35 @@ class QuestionController extends Controller
      * Finds a question set by its key_code.
      * Returns 404 with a message if the key is invalid.
      */
-    public function findByKey(string $keyCode)
+    public function findByKey(Request $request, string $keyCode)
     {
+        $request->validate([
+            'nis'      => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $student = Student::where('nis', $request->nis)->first();
+
+        if (! $student || ! Hash::check($request->password, $student->password)) {
+            return response()->json(['message' => 'Autentikasi gagal. Silakan login kembali.'], 401);
+        }
+
         $set = QuestionSet::with('questions')
             ->where('key_code', $keyCode)
             ->first();
 
         if (! $set) {
             return response()->json(['message' => 'Kode soal tidak ditemukan. Periksa kembali kode yang kamu masukkan.'], 404);
+        }
+
+        if ($set->is_one_time) {
+            $hasScore = StudentScore::where('student_id', $student->id)
+                ->where('question_set_id', $set->id)
+                ->exists();
+
+            if ($hasScore) {
+                return response()->json(['message' => 'Kamu sudah mengerjakan paket soal ini dan tidak dapat mengulangnya.'], 403);
+            }
         }
 
         return response()->json($this->formatSet($set));
@@ -83,11 +104,23 @@ class QuestionController extends Controller
             return response()->json(['message' => 'Paket soal tidak ditemukan.'], 404);
         }
 
-        // Create or update the score (a student can only have 1 score per set)
-        StudentScore::updateOrCreate(
-            ['student_id' => $student->id, 'question_set_id' => $set->id],
-            ['score' => $request->score]
-        );
+        $existingScore = StudentScore::where('student_id', $student->id)
+            ->where('question_set_id', $set->id)
+            ->first();
+
+        if ($set->is_one_time && $existingScore) {
+            return response()->json(['message' => 'Kamu sudah mengerjakan paket soal ini dan tidak dapat mengulangnya.'], 403);
+        }
+
+        if ($existingScore) {
+            $existingScore->update(['score' => $request->score]);
+        } else {
+            StudentScore::create([
+                'student_id'      => $student->id,
+                'question_set_id' => $set->id,
+                'score'           => $request->score,
+            ]);
+        }
 
         return response()->json(['message' => 'Skor berhasil disimpan.']);
     }
