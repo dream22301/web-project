@@ -86,7 +86,7 @@ class StudentScheduleController extends Controller
 
     public function clearAll()
     {
-        StudentSchedule::where('teacher_id', auth()->id())->query()->delete();
+        StudentSchedule::where('teacher_id', auth()->id())->delete();
 
         return redirect()->back()->with('success', 'Semua jadwal siswa berhasil dihapus!');
     }
