@@ -24,7 +24,7 @@ class StudentScheduleController extends Controller
             
         $schedules = $query->orderByRaw("FIELD(day, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')")
             ->orderBy('period_start')
-            ->paginate(10)->withQueryString()
+            ->paginate(5)->withQueryString()
             ->fragment('student_schedule');
             
         $history = StudentSchedule::where('teacher_id', auth()->id())
